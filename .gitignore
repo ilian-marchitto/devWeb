@@ -7,3 +7,5 @@
 
 # Réactiver tous les fichiers PHP
 !*.php
+
+config.php
