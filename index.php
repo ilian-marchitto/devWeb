@@ -1,7 +1,7 @@
 <?php
 // Tableau des routes autorisées : clé, fichier à inclure
 $routes = [
-    'home' => 'pages/accueil.php',
+    'home' => 'controllers/accueilController.php',
     'seConnecter' => 'pages/seConnecter.php',
     'sInscrire' => 'pages/sInscrire.php',
     'planDuSite' => 'pages/planDuSite.php'
