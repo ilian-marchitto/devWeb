@@ -1,0 +1,9 @@
+# Ignore tout
+*
+
+# Suivre certains fichiers/dossiers
+!devWeb/
+!devWeb/index.php
+!devWeb/footer.php
+!devWeb/header/php
+!devWeb/css/style.css
