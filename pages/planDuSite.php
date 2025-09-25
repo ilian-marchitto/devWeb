@@ -1,3 +1,3 @@
 <?php
-echo "Faut mettre la page bienvenue";
+echo "Faut mettre la page plan du site";
 ?>

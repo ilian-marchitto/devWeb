@@ -1,18 +1,19 @@
 <?php
-// Exemple très simple de routeur "maison"
+// Tableau des routes autorisées : clé, fichier à inclure
+$routes = [
+    'home' => 'pages/accueil.php',
+    'seConnecter' => 'pages/seConnecter.php',
+    'sInscrire' => 'pages/sInscrire.php',
+    'planDuSite' => 'pages/planDuSite.php'
+];
 
-if (filter_input(INPUT_GET, 'page')) {
+// Récupérer le paramètre 'page', sinon définir 'home' par défaut
+$page = filter_input(INPUT_GET, 'page') ?? 'home';
 
-    if ($_GET['page'] === 'home') {
-        include 'pages/accueil.php';
-    } elseif ($_GET['page'] === 'seConnecter') {
-        include 'pages/seConnecter.php';
-    } elseif ($_GET['page'] === 'sInscrire') {
-        include 'pages/sInscrire.php';
-    } elseif ($_GET['page'] === 'planDuSite') {
-        include 'pages/planDuSite.php';
-    } else {
-        echo "404 - Page non trouvée";
-    }
+// Vérifier si la page demandée est dans les routes autorisées
+if (isset($routes[$page])) {
+    include $routes[$page];
+} else {
+    // Page non trouvée → afficher une page 404
+    echo "<h2>404 - Page non trouvée</h2>";
 }
-?>
