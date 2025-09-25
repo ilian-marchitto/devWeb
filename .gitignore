@@ -1,9 +1,9 @@
 # Ignore tout
 *
 
-# Suivre certains fichiers/dossiers
-!devWeb/
-!devWeb/index.php
-!devWeb/footer.php
-!devWeb/header/php
-!devWeb/css/style.css
+# Réactiver les dossiers (Git ne suit pas les dossiers vides)
+!.gitignore
+!*/
+
+# Réactiver tous les fichiers PHP
+!*.php
