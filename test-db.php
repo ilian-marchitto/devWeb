@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/configs/config.php';
 try {
 // DSN PostgreSQL
 $dsn = "mysql:host=$host;port=$port;dbname=$db";
