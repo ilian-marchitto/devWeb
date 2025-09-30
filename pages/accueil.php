@@ -8,6 +8,14 @@
 </head>
 
 <body>
+<?php
+include '../classes/Menu.php';
+
+$menu = new Menu();
+
+echo $menu -> showMenu()
+
+?>
 </body>
 
 </html>
