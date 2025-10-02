@@ -15,8 +15,8 @@ $initiale = strtoupper(substr($prenom, 0, 1));
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue</title>
-    <link rel="stylesheet" href="style/bienvenue.css">
-    <meta http-equiv="refresh" content="1;url=pages/accueil.php">
+    <link rel="stylesheet" href="../style/bienvenue.css">
+    <meta http-equiv="refresh" content="1;url=accueil.php">
 </head>
 <body>
     <div class="welcome-message">
@@ -24,7 +24,7 @@ $initiale = strtoupper(substr($prenom, 0, 1));
     </div>
 
     <div class="login-image-wrapper">
-        <img src="assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
+        <img src="../assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
     </div>
 </body>
 </html>

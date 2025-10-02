@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["email"] = $user["email"];
                 $_SESSION["firstname"] = $user["firstname"];
 
-                header("Location: bienvenue.php");
+                header("Location: pages/bienvenue.php");
                 exit;
             } else {
                 $erreur = "Identifiant ou mot de passe incorrect.";
