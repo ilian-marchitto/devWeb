@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #C82B11,#d34a13, #DD8416);
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-image-wrapper {
+    margin-bottom: 20px; 
+    z-index: 1;
+}
+
+.login-image {
+    width: 350px;          
+    margin-bottom: -25px;  
+}
+
+.login-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 0;
+}
+
+.login-form h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.login-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-form button:hover {
+    background: #555;
+}
+
+.login-form p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.login-form .forgot a {
+    color: #e67e22;
+    text-decoration: none;
+}
+
+.login-form .forgot a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
