@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $pageTitle; ?></title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../style/accueil.css">
 </head>
 
 <body>
@@ -14,11 +14,13 @@ include '../classes/Header.php';
 
 
 $menu = new Header();
-
-echo $menu -> show()
-
-
 ?>
+
+<?php
+echo $menu -> render();
+?>
+
+
 
 <section id="Communaute">
 <h1> COMMU </h1>
@@ -28,7 +30,7 @@ echo $menu -> show()
     <h1> DES </h1>
     <p> blablablabla </p>
 </section>
-<section id="Albums">
+<section id="Albums" class="albums-section">
     <h1> ALBUMS </h1>
     <section>
         <figure>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/configs/config.php';
+require_once  '../configs/config.php';
 
 $erreur = "";
 
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     AND password = :mot_de_passe 
                     LIMIT 1";
 
-            $stmt = $connection->prepare($sql);
+            $stmt = $connection -> prepare($sql);
             $stmt->bindParam(":identifiant", $identifiant, PDO::PARAM_STR);
             $stmt->bindParam(":mot_de_passe", $mot_de_passe, PDO::PARAM_STR);
             $stmt->execute();
@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="style/seConnecter.css">
+    <link rel="stylesheet" href="../style/seConnecter.css">
 </head>
 <body>
     <div class="login-image-wrapper">
-        <img src="assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
+        <img src="../assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
     </div>
 
     <div class="login-container">

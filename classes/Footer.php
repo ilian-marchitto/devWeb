@@ -10,7 +10,7 @@ class Footer extends MenuBuilder {
 
     public function render() {
         echo '<footer>';
-        $this->show();
+        $this->showAll();
         echo '</footer>';
     }
 }

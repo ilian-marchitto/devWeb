@@ -1,45 +1,45 @@
 <?php
 class MenuBuilder {
-    private $items = [];
+    protected $items = [];
 
-    public function addItemsLink($name, $link) {
-        $this->items[] = ['nom' => $name, 'lien' => $link];
+    public function addItemsLink($name, $link, $class = null) {
+
+        $this->items[] = ['nom' => $name, 'lien' => $link, 'class' => $class];
     }
 
-    public function addItemPicture($picture, $link, $description = null) {
+    public function addItemPicture($picturePath, $link, $description = null, $class = null) {
         $item = [
-            'image' => $picture,
-            'lien'  => $link
+            'image' => $picturePath,
+            'lien'  => $link,
+            'class' => $class,
+            'description' => $description
         ];
 
-        if ($description !== null) {
-            $item['description'] = $description;
-        }
         $this->items[] = $item;
     }
 
+    public function showOnce($items) {
+        if (!empty($items['lien']) && !empty($items['nom'])) {
+            echo '<a href="' . $items['lien'] . '" class="' . ($items['class'] ?? '') . '">' . $items['nom'] . '</a>';
+        } elseif (!empty($items['image']) && !empty($items['lien'])) {
+            echo '<a href="' . $items['lien'] . '" class="' . ($items['class'] ?? '') . '">';
+            echo '<img src="' . $items['image'] . '" alt="">';
+            echo '</a>';
+        }
+    }
 
-    public function show() {
-        echo '<ul>';
+    public function showAll() {
 
         foreach ($this->items as $item) {
 
-            // Cas lien texte
             if (!empty($item['lien']) && !empty($item['nom'])) {
-                echo '<li>';
                 echo '<a href="' . $item['lien'] . '">' . $item['nom'] . '</a>';
-                echo '</li>';
 
-                // Cas image sans description
             } elseif (!empty($item['image']) && !empty($item['lien']) && empty($item['description'])) {
-                echo '<li>';
                 echo '<a href="' . $item['lien'] . '">';
                 echo '<img src="' . $item['image'] . '" alt="">';
-                echo '</a>';
-                echo '</li>';
             }
 
-            // Cas image avec description → pas dans <li>
             elseif (!empty($item['image']) && !empty($item['lien']) && !empty($item['description'])) {
                 echo '<a href="' . $item['lien'] . '">';
                 echo '<figure>';
@@ -49,8 +49,6 @@ class MenuBuilder {
                 echo '</a>';
             }
         }
-
-        echo '</ul>';
     }
 
 
