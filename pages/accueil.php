@@ -9,11 +9,13 @@
 
 <body>
 <?php
-include '../classes/Menu.php';
+include '../classes/MenuBuilder.php';
+include '../classes/Header.php';
 
-$menu = new Menu();
 
-echo $menu -> showMenu()
+$menu = new Header();
+
+echo $menu -> show()
 
 
 ?>

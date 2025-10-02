@@ -1,31 +1,16 @@
 <?php
-class Footer {
-    private $items = [];
-
-    public function addItem($picture, $link) {
-        $this->items[] = ['image' => $picture, 'lien' => $link];
-    }
-
-    public function showImages() {
-        foreach ($this->items as $item) {
-            if (isset($item['image']) && isset($item['lien'])) {
-                echo '<a href="' . $item['lien'] . '">';
-                echo '<img src="' . $item['image'] . '" alt="">';
-                echo '</a>';
-            }
-        }
-    }
+class Footer extends MenuBuilder {
 
     public function __construct() {
-        $this->addItem("Communaute", "#communaute");
-        $this->addItem("Description", "#description");
-        $this->addItem("Albums", "#albums");
-        $this->addItem("Actualite", "#Actualite");
+        $this->addItemPicture("../assets/images/instagram.webp", "#communaute");
+        $this->addItemPicture("../assets/images/css.webp", "#description");
+        $this->addItemPicture("../assets/images/html.webp", "#albums");
+        $this->addItemPicture("../assets/images/planDuSite.webp", "#Actualite");
     }
 
     public function render() {
         echo '<footer>';
-        $this->showImages();
+        $this->show();
         echo '</footer>';
     }
 }
