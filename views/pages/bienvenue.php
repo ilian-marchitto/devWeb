@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['firstname'])) {
-    header("Location: seConnecter.php");
+    header("Location: " . BASE_URL . "/index.php?page=seConnecter");
     exit;
 }
 
@@ -11,20 +11,23 @@ $initiale = strtoupper(substr($prenom, 0, 1));
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue</title>
-    <link rel="stylesheet" href="../style/bienvenue.css">
-    <meta http-equiv="refresh" content="1;url=accueil.php">
+    <link rel="stylesheet" href="<?= CSS_URL ?>/bienvenue.css">
+    <meta http-equiv="refresh" content="1;url=<?= BASE_URL ?>/index.php?page=home">
 </head>
+
 <body>
     <div class="welcome-message">
         <h1>BIENVENUE LE <?= htmlspecialchars($initiale) ?> </h1>
     </div>
 
     <div class="login-image-wrapper">
-        <img src="../assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
+        <img src='<?= IMAGES_URL ?>/Jul2tp.webp' alt="Image de connexion" class="login-image">
     </div>
 </body>
+
 </html>

@@ -3,6 +3,6 @@
 $pageTitle = "Bienvenue sur le site";
 
 // Inclure la vue
-include 'pages/accueil.php';
+include PAGES_PATH . '/accueil.php';
 
 ?>
