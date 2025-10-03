@@ -70,7 +70,7 @@
     </section>
 
     <?php
-    require_once LAYOUT_PATH . '/footer.php';
+    require_once LAYOUT_PATH . '/Footer.php';
     $footer = new Footer();
     $footer->render(); ?>
 
