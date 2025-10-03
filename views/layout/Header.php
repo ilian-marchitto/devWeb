@@ -13,8 +13,14 @@ class Header extends MenuBuilder {
         $nav->addItemsLink("Description", "#description");
         $nav->addItemsLink("Albums", "#albums");
         $nav->addItemsLink("Actualite", "#Actualite");
-        $font -> addItemPicture("../assets/images/fontJul.png", "#", "", "imageFont");
-        $user ->addItemPicture("../assets/images/iconUser.webp", "../devWeb/pages/SeConnecter.php", "", "userIcon");
+        $font -> addItemPicture(    IMAGES_URL . '/fontJul.png', 
+                                    "#", 
+                                    "", 
+                                    "imageFont");
+        $user ->addItemPicture(     IMAGES_URL . '/iconUser.webp', 
+                                    BASE_URL . '/index.php?page=seConnecter', 
+                                    '',
+                                    'userIcon');
         echo "<header>";
         echo "<nav> <ul>";
         foreach ($nav->items as $item) {

@@ -7,4 +7,6 @@
 
 # Réactiver tous les fichiers PHP
 !*.php
-!assets/*
+!*.css
+!*.webp
+!*.png
