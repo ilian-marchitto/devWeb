@@ -14,7 +14,7 @@ class Header extends MenuBuilder {
         $nav->addItemsLink("Albums", "#albums");
         $nav->addItemsLink("Actualite", "#Actualite");
         $font -> addItemPicture("../assets/images/fontJul.png", "#", "", "imageFont");
-        $user ->addItemPicture("../assets/images/iconUser.webp", "SeConnecter.php", "", "userIcon");
+        $user ->addItemPicture("../assets/images/iconUser.webp", "../devWeb/pages/SeConnecter.php", "", "userIcon");
         echo "<header>";
         echo "<nav> <ul>";
         foreach ($nav->items as $item) {
