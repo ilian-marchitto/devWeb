@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <title><?php echo $pageTitle; ?></title>
     <link rel="stylesheet" href="../style/accueil.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
 <?php
 include '../classes/MenuBuilder.php';
 include '../classes/Header.php';
 
 
 $menu = new Header();
-?>
-
-<?php
 echo $menu -> render();
 ?>
-
-
 
 <section id="Communaute">
 <h1> COMMU </h1>
