@@ -38,16 +38,9 @@ class MenuBuilder {
             } elseif (!empty($item['image']) && !empty($item['lien']) && empty($item['description'])) {
                 echo '<a href="' . $item['lien'] . '">';
                 echo '<img src="' . $item['image'] . '" alt="">';
-            }
-
-            elseif (!empty($item['image']) && !empty($item['lien']) && !empty($item['description'])) {
-                echo '<a href="' . $item['lien'] . '">';
-                echo '<figure>';
-                echo '<img src="' . $item['image'] . '" alt="">';
-                echo '<figcaption>' . $item['description'] . '</figcaption>';
-                echo '</figure>';
                 echo '</a>';
             }
+
         }
     }
 

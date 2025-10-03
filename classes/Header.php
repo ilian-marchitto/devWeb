@@ -1,17 +1,21 @@
 <?php
+
+use Couchbase\User;
+
 class Header extends MenuBuilder {
 
     public function render() {
         $nav = new MenuBuilder();
-        $test = new MenuBuilder();
+        $font = new MenuBuilder();
+        $user = new MenuBuilder();
 
         $nav->addItemsLink("Communaute", "#communaute");
         $nav->addItemsLink("Description", "#description");
         $nav->addItemsLink("Albums", "#albums");
         $nav->addItemsLink("Actualite", "#Actualite");
-
-        $test ->addItemPicture("../assets/images/iconUser.webp", "SeConnecter.php", "", "userIcon");
-
+        $font -> addItemPicture("../assets/images/fontJul.png", "#", "", "imageFont");
+        $user ->addItemPicture("../assets/images/iconUser.webp", "SeConnecter.php", "", "userIcon");
+        echo "<header>";
         echo "<nav> <ul>";
         foreach ($nav->items as $item) {
             echo "<li>" ;
@@ -20,8 +24,10 @@ class Header extends MenuBuilder {
         }
 
         echo "</ul>";
-        $test -> showOnce($test -> items[0]);
         echo "</nav>";
+        $user -> showOnce($user -> items[0]);
+        $font -> showOnce($font -> items[0]);
+        echo "</header>";
 
     }
 }
