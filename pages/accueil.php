@@ -14,8 +14,9 @@
 <body>
 
 <?php
-include '../classes/MenuBuilder.php';
-include '../classes/Header.php';
+require_once __DIR__ . '/../classes/MenuBuilder.php';
+require_once __DIR__ . '/../classes/Header.php';
+
 
 
 $menu = new Header();
