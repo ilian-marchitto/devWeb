@@ -18,7 +18,7 @@ define('LAYOUT_PATH', VIEWS_PATH . '/layout');
 // ─────────────── URLs publiques ───────────────
 
 // Lien principal 
-define('BASE_URL', '/devWeb/public');
+define('BASE_URL', '/public');
 
 // Sous-dossiers Public 
 define('CSS_URL', BASE_URL . '/css');
