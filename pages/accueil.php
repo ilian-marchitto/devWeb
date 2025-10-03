@@ -70,7 +70,7 @@ echo $menu -> render();
 </section>
 
 <?php
-include '../classes/Footer.php';
+require_once __DIR__ . '/../classes/Footer.php'; 
 $footer = new Footer();
 $footer -> render();?>
 
