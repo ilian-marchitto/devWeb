@@ -75,14 +75,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 <div class="login-image-wrapper">
-    <img src="assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
+    <img src="../assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
 </div>
 
 <div class="login-container">
     <form action="" method="post" class="login-form">
         <h2>Créer un compte</h2>
-        <?php if (!empty($erreur)) : ?>
-            <p class="error"><?= htmlspecialchars($erreur) ?></p>
+        <?php if (!empty($erreuremail)) : ?>
+            <p class="error"><?= htmlspecialchars($erreuremail) ?></p>
         <?php endif; ?>
         <label for="firstname">Prénom</label>
         <input type="text" name="firstname" id="firstname" placeholder="Julien" required>
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
 
         <button type="submit">Créer le compte</button>
-        <p>Déjà un compte ? <a href="#">Connecte toi</a></p>
+        <p>Déjà un compte ? <a href="seConnecter.php">Connecte toi</a></p>
     </form>
 </div>
 </body>
