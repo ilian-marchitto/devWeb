@@ -8,6 +8,7 @@ $user = getenv('DB_USER');
 $pwd  = getenv('DB_PASS');
 
 try {
+    $dsn = "mysql:host=$host; port=$port; dbname=$db";
     $connection = new PDO($dsn, $user, $pwd);
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $connection->exec('SET CHARACTER SET utf8');
