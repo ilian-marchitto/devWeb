@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($identifiant !== '' && $mot_de_passe !== '') {
         try {
-             $sql = "SELECT idu AS id, email, firstname, password 
+             $sql = "SELECT idu , email, firstname, password 
                 FROM users 
                 WHERE email = :email 
                 LIMIT 1";
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if ($user && password_verify($mot_de_passe, $user['password'])) {
                 session_regenerate_id(true);
-                 $_SESSION["user_id"]   = $user["id"];        // ici c'est idu, mais aliasé en id
+                 $_SESSION["user_id"]   = $user["idu"];        
                 $_SESSION["email"]     = $user["email"];
                 $_SESSION["firstname"] = $user["firstname"];
 
