@@ -1,10 +1,9 @@
 <?php
-require_once '../config.php';
+require BASE_PATH.'/config.php';
 
-// Inclure les fichiers nécessaires PHPMailer
-require '../vendor/PHPMailer/src/PHPMailer.php';
-require '../vendor/PHPMailer/src/SMTP.php';
-require '../vendor/PHPMailer/src/Exception.php';
+require BASE_PATH.'/vendor/PHPMailer/src/PHPMailer.php';
+require BASE_PATH.'../vendor/PHPMailer/src/SMTP.php';
+require BASE_PATH.'../vendor/PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
