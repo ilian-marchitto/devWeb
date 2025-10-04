@@ -7,68 +7,22 @@
     <link rel="stylesheet" href="<?= CSS_URL ?>/seConnecter.css">
 </head>
 
-<?php
-require_once BASE_PATH . '/config.php';
-
-// Vérification de la soumission du formulaire
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstname = trim($_POST["firstname"]);
-    $lastname = trim($_POST["lastname"]);
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-    $song_id = $_POST["song_id"];
-
-    // Vérification de l'unicité de l'email
-    $stmt = $connection->prepare("SELECT email FROM users WHERE email = :email");
-    $stmt->execute(['email' => $email]);
-    $existant = $stmt->fetchAll();
-
-    $unique = true;
-    foreach ($existant as $row) {
-        if ($row['email'] === $email) {
-            $unique = false;
-            $erreuremail = 'Email déjà utilisé';
-        }
-    }
-
-    // Création du compte si unique
-    if ($unique) {
-        $hash = password_hash($password, PASSWORD_DEFAULT); // Sécurisation du mot de passe
-
-        $query = "INSERT INTO users (firstname, lastname, email, password, song_id) VALUES (:firstname, :lastname, :email, :password, :song_id)";
-        $requete = $connection->prepare($query);
-
-        try {
-            $requete->execute([
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'email' => $email,
-                    'password' => $hash,
-                    'song_id' => $song_id
-            ]);
-
-            session_start();
-            $_SESSION["firstname"] = $firstname;
-            header("Location:". BASE_URL . "index.php?page=bienvenue");
-            exit;
-        } catch (PDOException $e) {
-            echo "Erreur d'insertion : " . $e->getMessage();
-        }
-    }
-}
-?>
-
 <body>
 <div class="login-image-wrapper">
     <img src="<?= IMAGES_URL ?>/Jul2tp.webp" alt="Image de connexion" class="login-image">
 </div>
 
 <div class="login-container">
-    <form action="" method="post" class="login-form">
+    <form action="?page=signup" method="post" class="login-form">
         <h2>Créer un compte</h2>
-        <?php if (!empty($erreuremail)) : ?>
-            <p class="error"><?= htmlspecialchars($erreuremail) ?></p>
-        <?php endif; ?>
+        <?php
+        session_start();
+        if (!empty($_SESSION['erreuremail'])) : ?>
+            <p class="error"><?= htmlspecialchars($_SESSION['erreuremail']) ?></p>
+        <?php
+            unset($_SESSION['erreuremail']);
+        endif;
+        ?>
         <label for="firstname">Prénom</label>
         <input type="text" name="firstname" id="firstname" placeholder="Julien" required>
 
