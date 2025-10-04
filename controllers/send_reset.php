@@ -1,9 +1,9 @@
 <?php
 require BASE_PATH.'/config.php';
 
-require BASE_PATH.'/vendor/PHPMailer/src/PHPMailer.php';
-require BASE_PATH.'../vendor/PHPMailer/src/SMTP.php';
-require BASE_PATH.'../vendor/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -40,7 +40,7 @@ $upd = $connection->prepare("UPDATE users SET reset_token = ?, reset_expires = ?
 $upd->execute([$token, $expires, $user['email']]);
 
 // Construire le lien de réinitialisation
-$link = "localhost/".BASE_URL."/index.php?page=password_reset&token=" . urlencode($token);
+$link = BASE_URL."/index.php?page=password_reset&token=" . urlencode($token);
 
 // Envoi de l'e-mail via PHPMailer
 $mail = new PHPMailer(true);
