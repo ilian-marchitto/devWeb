@@ -7,24 +7,23 @@ $erreur = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $identifiant = trim($_POST["identifiant"]);
-    $mot_de_passe = trim($_POST["mot_de_passe"]);
+    $mot_de_passe = $_POST["mot_de_passe"] ?? '';
 
-    if (!empty($identifiant) && !empty($mot_de_passe)) {
+    if ($identifiant !== '' && $mot_de_passe !== '') {
         try {
-            $sql = "SELECT * FROM users 
-                    WHERE email = :identifiant 
-                    AND password = :mot_de_passe 
-                    LIMIT 1";
+             $sql = "SELECT idu AS id, email, firstname, password 
+                FROM users 
+                WHERE email = :email 
+                LIMIT 1";
 
             $stmt = $connection->prepare($sql);
-            $stmt->bindParam(":identifiant", $identifiant, PDO::PARAM_STR);
-            $stmt->bindParam(":mot_de_passe", $mot_de_passe, PDO::PARAM_STR);
-            $stmt->execute();
-
+            $stmt->execute([':email' => $identifiant]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user) {
-                $_SESSION["email"] = $user["email"];
+            if ($user && password_verify($mot_de_passe, $user['password'])) {
+                session_regenerate_id(true);
+                 $_SESSION["user_id"]   = $user["id"];        // ici c'est idu, mais aliasé en id
+                $_SESSION["email"]     = $user["email"];
                 $_SESSION["firstname"] = $user["firstname"];
 
                 header("Location:". BASE_URL . "/index.php?page=bienvenue");
@@ -59,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form action="" method="post" class="login-form">
             <h2>Connexion</h2>
             <?php if (!empty($erreur)) : ?>
-                <p class="error"><?= htmlspecialchars($erreur) ?></p>
+                <p class="error" role="alert" aria-live="assertive"><?= htmlspecialchars($erreur) ?></p>
             <?php endif; ?>
             <label for="identifiant">Email</label>
             <input type="email" name="identifiant" id="identifiant" placeholder="juldetp@d&p.com" required>
