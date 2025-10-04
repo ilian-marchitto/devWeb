@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once  BASE_PATH . '/config.php';
+require_once '../config.php';
 
 $erreur = "";
 
