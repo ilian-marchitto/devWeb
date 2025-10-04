@@ -4,26 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Créer un compte</title>
-    <link rel="stylesheet" href="../style/seConnecter.css">
+    <link rel="stylesheet" href="<?= CSS_URL ?>/seConnecter.css">
 </head>
 
 <?php
-require_once __DIR__ . '/../configs/config.php';
-try {
-    // DSN MySQL
-    $dsn = "mysql:host=$host;port=$port;dbname=$db";
-
-    // Création de la connexion PDO
-    $connection = new PDO($dsn, $user, $pwd);
-
-    // Mode d'erreur : exceptions
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Codage de caractères.
-    $connection->exec('SET CHARACTER SET utf8');
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
-}
+require_once BASE_PATH . '/config.php';
 
 // Vérification de la soumission du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -64,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             session_start();
             $_SESSION["firstname"] = $firstname;
-            header("Location: bienvenue.php");
+            header("Location:". BASE_URL . "index.php?page=bienvenue");
             exit;
         } catch (PDOException $e) {
             echo "Erreur d'insertion : " . $e->getMessage();
@@ -75,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 <div class="login-image-wrapper">
-    <img src="../assets/images/Jul2tp.webp" alt="Image de connexion" class="login-image">
+    <img src="<?= IMAGES_URL ?>/Jul2tp.webp" alt="Image de connexion" class="login-image">
 </div>
 
 <div class="login-container">
@@ -110,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
 
         <button type="submit">Créer le compte</button>
-        <p>Déjà un compte ? <a href="seConnecter.php">Connecte toi</a></p>
+        <p>Déjà un compte ? <a href="<?= BASE_URL ?>index.php?page=seConnecter">Connecte toi</a></p>
     </form>
 </div>
 </body>
