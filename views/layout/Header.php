@@ -4,6 +4,10 @@
 require_once LAYOUT_PATH . '/MenuBuilder.php';
 $isLoggedIn = isset($_SESSION['user']);
 class Header extends MenuBuilder {
+
+    private MenuBuilder $nav;
+    private MenuBuilder $buttonHtml;
+    private bool $isLoggedIn;
     public function __construct($isLoggedIn) {
         $this->nav = new MenuBuilder(); //ELements present dans la nav bar
         $this->buttonHtml = new MenuBuilder(); // Buttons SeConnecter / Deconnecter
