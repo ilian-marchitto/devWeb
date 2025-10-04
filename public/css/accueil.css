@@ -48,16 +48,17 @@ nav a:hover {
     color: #ff9800;
 }
 
-.imageFont img{
+.imageFont img {
     width: 100%;
+    height: auto;
     top: 0;
 }
 
-.userIcon {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-}
+/*.userIcon {*/
+/*    position: fixed;*/
+/*    top: 10px;*/
+/*    right: 10px;*/
+/*}*/
 
 /* Footer */
 footer {
@@ -67,3 +68,50 @@ footer {
     padding: 20px;
     gap: 10%;
 }
+
+
+/* Style pour le bouton connecter/deconnecter*/
+
+.user-dropdown {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+
+    display: inline-block;
+}
+
+.userIcon {
+    width: 40px;
+    cursor: pointer;
+}
+
+.toggle-checkbox {
+    display: none; /* cacher la checkbox */
+}
+
+.dropdown-content {
+    display: none; /* caché par défaut */
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    background-color: white;
+}
+
+/* Afficher le menu quand la checkbox est cochée */
+.toggle-checkbox:checked + label + .dropdown-content {
+    display: block;
+}
+
+
+
+
+

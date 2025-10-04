@@ -1,4 +1,5 @@
 <?php
+require_once LAYOUT_PATH . '/MenuBuilder.php';
 class Footer extends MenuBuilder {
 
     public function __construct() {

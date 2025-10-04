@@ -16,12 +16,12 @@ body {
 
 .login-image-wrapper {
     margin-bottom: 20px;
-    z-index: 1;
+    z-index: -1;
 }
 
 .login-image {
-    width: 350px;
-    margin-bottom: -25px;
+    width: 350px;          
+    margin-bottom: -25px;  
 }
 
 .login-container {

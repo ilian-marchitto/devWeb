@@ -1,8 +1,9 @@
 <?php
-
 $pageTitle = "Bienvenue sur le site";
 
-// Inclure la vue
-include PAGES_PATH . '/accueil.php';
 
-?>
+require_once CONTROLLERS_PATH . '/HeaderController.php';
+
+require_once PAGES_PATH . '/accueil.php';
+
+require_once CONTROLLERS_PATH . '/footerController.php';
