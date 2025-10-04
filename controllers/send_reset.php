@@ -40,7 +40,7 @@ $upd = $connection->prepare("UPDATE users SET reset_token = ?, reset_expires = ?
 $upd->execute([$token, $expires, $user['email']]);
 
 // Construire le lien de réinitialisation
-$link = "localhost/".BASE_URL."/index.php?page=password_reset&token=" . urlencode($token);
+$link = BASE_URL."/index.php?page=password_reset&token=" . urlencode($token);
 
 // Envoi de l'e-mail via PHPMailer
 $mail = new PHPMailer(true);
