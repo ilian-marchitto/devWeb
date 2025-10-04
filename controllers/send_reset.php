@@ -1,9 +1,9 @@
 <?php
 require BASE_PATH.'/config.php';
 
-require 'devWeb/vendor/PHPMailer/src/PHPMailer.php';
-require BASE_PATH.'../vendor/PHPMailer/src/SMTP.php';
-require BASE_PATH.'../vendor/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
