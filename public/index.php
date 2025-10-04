@@ -24,7 +24,7 @@ define('LAYOUT_PATH', VIEWS_PATH . '/layout');
 
 
 // Lien principal
-define('BASE_URL', '/devWeb/public');
+define('BASE_URL', 'https://fan2jul.alwaysdata.net');
 
 
 // Sous-dossiers Public
@@ -42,7 +42,11 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
     'sInscrire' => PAGES_PATH . '/sInscrire.php',
     'planDuSite' => PAGES_PATH . '/planDuSite.php',
     'bienvenue' => PAGES_PATH . '/bienvenue.php',
-    'logout' => CONTROLLERS_PATH . '/seDeconnecterController.php'];
+    'logout' => CONTROLLERS_PATH . '/seDeconnecterController.php',
+    'forgot' => PAGES_PATH . '/forgot.php',
+    'send_reset' => CONTROLLERS_PATH . '/send_reset.php',
+    'password_reset' => PAGES_PATH . '/password_reset.php',
+    'perform_reset' => CONTROLLERS_PATH . '/perform_reset.php'];
 
 // Récupérer le paramètre 'page', sinon définir 'home' par défaut
 $page = filter_input(INPUT_GET, 'page') ?? 'home';
