@@ -24,7 +24,7 @@ define('LAYOUT_PATH', VIEWS_PATH . '/layout');
 
 
 // Lien principal
-define('BASE_URL', '/devWeb/public');
+define('https://fan2jul.alwaysdata.net/');
 
 
 // Sous-dossiers Public
