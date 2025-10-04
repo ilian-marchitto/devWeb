@@ -10,3 +10,6 @@
 !*.css
 !*.webp
 !*.png
+
+config.php
+index.php
