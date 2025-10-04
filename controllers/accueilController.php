@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $pageTitle = "Bienvenue sur le site";
 
 
