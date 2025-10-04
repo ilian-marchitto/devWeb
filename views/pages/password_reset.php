@@ -1,5 +1,6 @@
 <?php
-require '../config.php';
+require_once __DIR__ . '/../../config.php';
+
 $token = $_GET['token'] ?? '';
 if (!$token) { echo "Lien invalide."; exit; }
 
