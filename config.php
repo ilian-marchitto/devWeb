@@ -7,9 +7,9 @@ $db   = getenv('DB_NAME');
 $user = getenv('DB_USER');
 $pwd  = getenv('DB_PASS');
 
-$mailHost = getenv('DB_MAIL_PWD');
+$mailHost = getenv('DB_MAIL_HOST');
 $mailUsername = getenv('DB_MAIL_USERNAME');
-$mailPwd = getenv('DB_MAIL_HOST');
+$mailPwd = getenv('DB_MAIL_PWD');
 
 try {
     $dsn = "mysql:host=$host; port=$port; dbname=$db";
