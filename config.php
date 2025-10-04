@@ -7,7 +7,7 @@ $db   = getenv('DB_NAME');
 $user = getenv('DB_USER');
 $pwd  = getenv('DB_PASS');
 
-$mailHost = getenv('DB_MAIL_PWD')
+$mailHost = getenv('DB_MAIL_PWD');
 $mailUsername = getenv('DB_MAIL_USERNAME');
 $mailPwd = getenv('DB_MAIL_HOST');
 
