@@ -12,7 +12,7 @@ if (is_dir($dirDisk)) {
 
         $slug = pathinfo($file, PATHINFO_FILENAME); // nom sans .blabla
 
-        if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter'], true)) continue;
+        if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter','mdpRnit','mdpOublie'], true)) continue;
 
         $pages[] = [
             'name' => $slug,
