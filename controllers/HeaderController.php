@@ -31,6 +31,7 @@ class HeaderController
             $this->buttonHtml->addItemsLink("Se déconnecter", BASE_URL . '/index.php?page=logout');
         } else {
             $this->buttonHtml->addItemsLink("Se connecter", BASE_URL . '/index.php?page=seConnecter');
+            $this->buttonHtml->addItemsLink("S'inscrire", BASE_URL . '/index.php?page=sInscrire');
         }
     }
 

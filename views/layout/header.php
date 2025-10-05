@@ -1,5 +1,11 @@
 <body>
 <header>
+    <input type="checkbox" id="toggleMenu" class="hamburger">
+    <label for="toggleMenu" class="hamburger-label">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
     <nav>
         <ul>
             <?php foreach ($navItems->getItems() as $item): ?>
@@ -23,5 +29,6 @@
             <?php foreach ($buttonItems->getItems() as $item): ?>
                 <?php $buttonItems->showOnce($item); ?>
             <?php endforeach; ?>
+        </di>
     </div>
 </header>

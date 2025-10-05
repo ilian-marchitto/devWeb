@@ -3,18 +3,15 @@
 require_once CONTROLLERS_PATH . '/Builder.php';
 class FooterController extends Builder
 {
-
     public function __construct()
     {
-        $this->addItemPicture(IMAGES_URL . '/instagram.webp', "#communaute");
-        $this->addItemPicture(IMAGES_URL . '/css.webp', "#description");
-        $this->addItemPicture(IMAGES_URL . '/html.webp', "#albums");
-        $this->addItemPicture(IMAGES_URL . '/planDuSite.webp', "#Actualite");
+        $this->addItemPicture(IMAGES_URL . '/instagram.webp', "#");
+        $this->addItemPicture(IMAGES_URL . '/css.webp', "#");
+        $this->addItemPicture(IMAGES_URL . '/html.webp', "#");
+        $this->addItemPicture(IMAGES_URL . '/planDuSite.webp', "#");
     }
 }
 
-
-// Créer l’instance de Footer
 $footer = new FooterController();
 
-require_once LAYOUT_PATH . '/footer.php';
+

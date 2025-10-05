@@ -1,6 +1,3 @@
-
-<body>
-
 <!-- Contenu de la page -->
 <section id="Communaute">
     <h1> COMMU </h1>
@@ -25,5 +22,4 @@
     <h1> ACTU </h1>
 </section>
 
-</body>
 
