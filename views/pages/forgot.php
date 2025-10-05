@@ -24,7 +24,7 @@
 
         <p class="forgot">
             <a href="<?= BASE_URL ?>/index.php?page=seConnecter">Retour à la connexion</a>
-            <a href="<?= BASE_URL ?>/index.php?page=home">Retour à la l'accueil</a>
+            <a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a>
         </p>
     </div>
     <?php if(!empty($error)): ?>
