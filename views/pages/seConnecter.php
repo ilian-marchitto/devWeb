@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
 
     <div class="login-container">
+        <div class="login-form">
         <form action="" method="post" class="login-form">
             <h2>Connexion</h2>
             <?php if (!empty($erreur)) : ?>
@@ -70,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p class="forgot"><a href=<?= BASE_URL ?>index.php?page=forgot>Mot de passe oublié ?</a></p>
             <p>Pas encore de compte ? <a href="<?= BASE_URL ?>index.php?page=sInscrire">Crée le maintenant</a></p>
         </form>
+        </div>
     </div>
 </body>
 
