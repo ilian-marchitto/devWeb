@@ -75,6 +75,25 @@ select {
     background-size: 12px;
 }
 
+.login-form .forgot {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* espace entre les liens */
+}
+
+.login-form .forgot a {
+    color: #ff7a00;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login-form .forgot a:hover {
+    text-decoration: underline;
+    color: #e67e22;
+}
+
 select:focus {
     border-color: #888;
     outline: none;
@@ -112,6 +131,124 @@ select:focus {
 }
 
 .error {
-    color: red;
-    margin-bottom: 10px;
+    background-color: #ffe5e5; /* fond rouge clair */
+    color: #d8000c; /* texte rouge foncé */
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 15px 0 15px 0; /* espace au-dessus et en dessous */
+    font-size: 14px;
+    text-align: left;
 }
+
+.success {
+    background-color: #e6ffed; /* fond vert clair */
+    color: #2e7d32; /* texte vert foncé */
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 15px 0 15px 0; /* espace au-dessus et en dessous */
+    font-size: 14px;
+    text-align: left;
+}
+
+.info {
+    background-color: #fff4e5; /* fond orange clair */
+    color: #ff7a00; /* texte orange foncé */
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 15px 0 15px 0; /* espace au-dessus et en dessous */
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Tablettes (max-width: 992px) */
+@media (max-width: 992px) {
+    .login-container {
+        max-width: 350px;
+        padding: 25px;
+    }
+
+    .login-image {
+        width: 280px;
+        margin-bottom: -20px;
+    }
+
+    .login-form h2 {
+        font-size: 22px;
+    }
+
+    .login-form input,
+    .login-form select,
+    .login-form button {
+        font-size: 15px;
+        padding: 11px;
+    }
+
+    .login-form .forgot {
+        gap: 15px;
+    }
+}
+
+/* Mobiles (max-width: 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .login-container {
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    .login-image {
+        width: 220px;
+        margin-bottom: -15px;
+    }
+
+    .login-form h2 {
+        font-size: 20px;
+    }
+
+    .login-form input,
+    .login-form select,
+    .login-form button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .login-form .forgot {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Petits écrans (max-width: 480px) */
+@media (max-width: 480px) {
+    .login-container {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .login-image {
+        width: 180px;
+        margin-bottom: -10px;
+    }
+
+    .login-form h2 {
+        font-size: 18px;
+    }
+
+    .login-form input,
+    .login-form select,
+    .login-form button {
+        font-size: 13px;
+        padding: 9px;
+    }
+
+    .error, .success, .info {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+}
+
+
