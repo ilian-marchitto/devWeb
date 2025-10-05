@@ -15,16 +15,16 @@
 
     <div class="login-container">
         <div class="login-form">
-        <form action="?page=login" method="post" class="login-form">
+            <form action="?page=login" method="post" class="login-form">
                 <h2>Connexion</h2>
-            <?php
-            session_start();
-            if (!empty($_SESSION['erreur'])) : ?>
-                <p class="error" role="alert" aria-live="assertive"><?= htmlspecialchars($_SESSION['erreur']) ?></p>
-            <?php
-                unset($_SESSION['erreur']);
-            endif;
-            ?>
+                <?php
+                session_start();
+                if (!empty($_SESSION['erreur'])) : ?>
+                    <p class="error" role="alert" aria-live="assertive"><?= htmlspecialchars($_SESSION['erreur']) ?></p>
+                <?php
+                    unset($_SESSION['erreur']);
+                endif;
+                ?>
                 <label for="identifiant">Email</label>
                 <input type="email" name="identifiant" id="identifiant" placeholder="juldetp@d&p.com" required>
 
