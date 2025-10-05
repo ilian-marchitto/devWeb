@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title><?= $pageTitle ?></title>
-    <link rel="stylesheet" href="<?= CSS_URL ?>/accueil.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-</head>
+
 <body>
 
 <!-- Contenu de la page -->
@@ -35,4 +26,4 @@
 </section>
 
 </body>
-</html>
+

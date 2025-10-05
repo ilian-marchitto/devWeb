@@ -1,7 +1,7 @@
 <?php
-require_once LAYOUT_PATH . '/Footer.php';
-require_once CONTROLLERS_PATH . '/MenuBuilder.php';
-class Footer extends MenuBuilder
+
+require_once CONTROLLERS_PATH . '/Builder.php';
+class FooterController extends Builder
 {
 
     public function __construct()
@@ -11,17 +11,10 @@ class Footer extends MenuBuilder
         $this->addItemPicture(IMAGES_URL . '/html.webp', "#albums");
         $this->addItemPicture(IMAGES_URL . '/planDuSite.webp', "#Actualite");
     }
-
-    public function render()
-    {
-        echo '<footer>';
-        $this->showAll();
-        echo '</footer>';
-    }
 }
 
 
 // Créer l’instance de Footer
-$footer = new Footer();
-$footer->render();
+$footer = new FooterController();
 
+require_once LAYOUT_PATH . '/footer.php';

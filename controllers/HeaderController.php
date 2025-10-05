@@ -1,71 +1,57 @@
 <?php
+// controllers/HeaderController.php
 
-include CONTROLLERS_PATH.'/MenuBuilder.php';
-include LAYOUT_PATH . '/Header.php';
+include CONTROLLERS_PATH . '/Builder.php';
 session_start();
 
 $isLoggedIn = isset($_SESSION['email']);
 
-class HeaderController extends MenuBuilder {
+class HeaderController
+{
+    private Builder $font;
+    private Builder $nav;
+    private Builder $buttonHtml;
 
-    private MenuBuilder $nav;
-    private MenuBuilder $buttonHtml;
-    private bool $isLoggedIn;
-    public function __construct($isLoggedIn) {
-        $this->nav = new MenuBuilder(); //ELements present dans la nav bar
-        $this->buttonHtml = new MenuBuilder(); // Buttons SeConnecter / Deconnecter
+    public function __construct(bool $isLoggedIn)
+    {
+        $this -> font = new Builder();
+        $this->nav = new Builder();
+        $this->buttonHtml = new Builder();
 
+        // Liens de nav
         $this->nav->addItemsLink("Communaute", "#communaute");
         $this->nav->addItemsLink("Description", "#description");
         $this->nav->addItemsLink("Albums", "#albums");
-        $this->nav->addItemsLink("Actualite", "#Actualite");
+        $this->nav->addItemsLink("Actualite", "#actualite");
 
-        $this->addItemPicture(IMAGES_URL . '/fontJul.png', "#", "", "imageFont");
+        // Logo (par exemple)
+        $this-> font-> addItemPicture(IMAGES_URL . '/fontJul.png', '#', 'ImageFont', 'imageFont');
+        // Bouton connexion / déconnexion
         if ($isLoggedIn) {
-            $this -> buttonHtml ->addItemsLink("Se déconnecter", BASE_URL . '/index.php?page=logout');
+            $this->buttonHtml->addItemsLink("Se déconnecter", BASE_URL . '/index.php?page=logout');
         } else {
-            $this -> buttonHtml ->addItemsLink("Se connecter", BASE_URL . '/index.php?page=seConnecter');
+            $this->buttonHtml->addItemsLink("Se connecter", BASE_URL . '/index.php?page=seConnecter');
         }
-
-
     }
-    public function render() {
-        echo "<header>";
 
-        // Menu principal
-        echo "<nav><ul>";
-        foreach ($this->nav->items as $item) {
-            echo "<li>";
-            $this->nav->showOnce($item);
-            echo "</li>";
-        }
-        echo "</ul></nav>";
+    // getters -> on expose les objets Builder (et headerItems si besoin)
+    public function getNavItems(): Builder {
+        return $this->nav;
+    }
 
-        // Logo et autres items
-        foreach ($this->items as $item) {
-            $this->showOnce($item);
-        }
+    public function getButtonItems(): Builder {
+        return $this->buttonHtml;
+    }
 
-        // Dropdown utilisateur
-        echo '<div class="user-dropdown">';
-        echo '<input type="checkbox" id="toggleUser" class="toggle-checkbox">';
-        echo '<label for="toggleUser">';
-        echo '<img src="' . IMAGES_URL . '/iconUser.webp" alt="Image de connexion" class="login-image">';
-        echo '</label>';
-        echo '<div class="dropdown-content" id="dropdownContent">';
-        foreach ($this->buttonHtml->items as $item) {
-            $this->buttonHtml->showOnce($item);
-        }
-        echo '</div></div>';
-
-        echo "</header>";
+    public function getFontItems(): Builder {
+        return $this -> font;
     }
 }
 
-// Créer l’instance de Header
 $header = new HeaderController($isLoggedIn);
-$header->render();
 
-
-
+// Récupération des items à passer à la vue
+$navItems = $header->getNavItems();
+$buttonItems = $header->getButtonItems();
+$FontItems = $header->getFontItems();
 
