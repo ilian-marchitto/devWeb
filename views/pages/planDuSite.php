@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($pageTitle) ?></title>
+    <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'Plan du site' ?></title>
     <link rel="stylesheet" href="<?= CSS_URL ?>/planDuSite.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,9 +10,8 @@
 </head>
 
 <body>
-
     <main class="plan-du-site-container">
-        <h1><?= htmlspecialchars($pageTitle) ?></h1>
+        <h1><?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'Plan du site' ?></h1>
         <p>Liste de toutes les pages présentes dans <code>views/pages</code> :</p>
 
         <ul>
@@ -29,6 +28,5 @@
             <?php endif; ?>
         </ul>
     </main>
-
 </body>
 </html>
