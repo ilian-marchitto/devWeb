@@ -7,28 +7,27 @@ $pages   = [];
 
 if (is_dir($dirDisk)) {
     foreach (scandir($dirDisk) as $file) {
-        if ($file[0] === '.') continue;                  
-       
+        if ($file[0] === '.') continue;
 
         $slug = pathinfo($file, PATHINFO_FILENAME); // nom sans .blabla
-        $displayName = ($slug === 'accueil') ? 'Home' : $slug;
 
-        if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter','mdpRnit','mdpOublie'], true)) continue;
-        
+        if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter','mdpRenit','mdpOublie'], true)) continue;
+
         if ($slug === 'accueil') {
             $displayName = 'Accueil';   
-            $linkSlug    = 'home';     
+            $linkSlug    = 'home';      
         } else {
-            $displayName = $slug;     
+            $displayName = $slug;      
             $linkSlug    = $slug;       
         }
+
         $pages[] = [
-            'name' => $slug,
-            'url'  => BASE_URL . '/?page=' . rawurlencode($slug),
+            'name' => $displayName,
+            'url'  => BASE_URL . '/?page=' . rawurlencode($linkSlug),
         ];
     }
 
-    usort($pages, fn($a,$b) => strcasecmp($a['name'], $b['name']));
+    usort($pages, fn($a, $b) => strcasecmp($a['name'], $b['name']));
 }
 
 require VIEWS_PATH . '/pages/planDuSite.php';
