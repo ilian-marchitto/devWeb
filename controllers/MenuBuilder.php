@@ -1,16 +1,20 @@
 <?php
-class MenuBuilder {
+
+class MenuBuilder
+{
     protected $items = [];
 
-    public function addItemsLink($name, $link, $class = null) {
+    public function addItemsLink($name, $link, $class = null)
+    {
 
         $this->items[] = ['nom' => $name, 'lien' => $link, 'class' => $class];
     }
 
-    public function addItemPicture($picturePath, $link, $description = null, $class = null) {
+    public function addItemPicture($picturePath, $link, $description = null, $class = null)
+    {
         $item = [
             'image' => $picturePath,
-            'lien'  => $link,
+            'lien' => $link,
             'class' => $class,
             'description' => $description
         ];
@@ -18,7 +22,8 @@ class MenuBuilder {
         $this->items[] = $item;
     }
 
-    public function showOnce($items) {
+    public function showOnce($items)
+    {
         if (!empty($items['lien']) && !empty($items['nom'])) {
             echo '<a href="' . $items['lien'] . '" class="' . ($items['class'] ?? '') . '">' . $items['nom'] . '</a>';
         } elseif (!empty($items['image']) && !empty($items['lien'])) {
@@ -28,7 +33,8 @@ class MenuBuilder {
         }
     }
 
-    public function showAll() {
+    public function showAll()
+    {
 
         foreach ($this->items as $item) {
 
@@ -46,4 +52,5 @@ class MenuBuilder {
 
 
 }
+
 ?>
