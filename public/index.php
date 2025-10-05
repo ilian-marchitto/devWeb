@@ -13,7 +13,7 @@ define('CONTROLLERS_PATH', BASE_PATH . '/controllers');
 define('MODELS_PATH', BASE_PATH . '/models');
 define('VIEWS_PATH', BASE_PATH . '/views');
 define('PUBLIC_PATH', BASE_PATH . '/public');
-
+define ('PHPMAILER_PATH', BASE_PATH . '/vendor/phpmailer/phpmailer/src');
 
 // Sous-dossiers Views
 define('PAGES_PATH', VIEWS_PATH . '/pages');
@@ -46,7 +46,7 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
     'signup' => CONTROLLERS_PATH . '/sInscrireController.php',
     'login' => CONTROLLERS_PATH . '/seConnecterController.php',
     'forgot' => PAGES_PATH . '/forgot.php',
-    'send_reset' => CONTROLLERS_PATH . '/send_reset.php',
+    'send_reset' => CONTROLLERS_PATH . '/forgotController.php',
     'password_reset' => PAGES_PATH . '/password_reset.php',
     'perform_reset' => CONTROLLERS_PATH . '/perform_reset.php'];
 

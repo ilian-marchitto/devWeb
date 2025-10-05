@@ -16,7 +16,6 @@ body {
 nav {
     position: fixed;
     top: 0;
-    width: 100%;
     z-index: 2000;
 }
 
@@ -107,54 +106,54 @@ footer {
 /* ----- RESPONSIVE DESIGN ----- */
 
 /* Tablettes (max 992px) */
-@media (max-width: 992px) {
-    nav a {
-        font-size: 24px;
-    }
-    nav li {
-        padding: 15px;
-    }
-    .userIcon {
-        width: 35px;
-    }
-}
+/*@media (max-width: 992px) {*/
+/*    nav a {*/
+/*        font-size: 24px;*/
+/*    }*/
+/*    nav li {*/
+/*        padding: 15px;*/
+/*    }*/
+/*    .userIcon {*/
+/*        width: 35px;*/
+/*    }*/
+/*}*/
 
-/* Mobiles (max 768px) */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column; /* nav verticale */
-        align-items: stretch;
-    }
+/*!* Mobiles (max 768px) *!*/
+/*@media (max-width: 768px) {*/
+/*    nav ul {*/
+/*        flex-direction: column; !* nav verticale *!*/
+/*        align-items: stretch;*/
+/*    }*/
 
-    nav li {
-        text-align: center;
-        padding: 15px 0;
-        width: 100%;
-        border-bottom: 1px solid #222;
-    }
+/*    nav li {*/
+/*        text-align: center;*/
+/*        padding: 15px 0;*/
+/*        width: 100%;*/
+/*        border-bottom: 1px solid #222;*/
+/*    }*/
 
-    nav a {
-        font-size: 20px;
-    }
+/*    nav a {*/
+/*        font-size: 20px;*/
+/*    }*/
 
-    footer {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-}
+/*    footer {*/
+/*        flex-direction: column;*/
+/*        gap: 10px;*/
+/*        text-align: center;*/
+/*    }*/
+/*}*/
 
-/* Petits écrans (max 480px) */
-@media (max-width: 480px) {
-    nav a {
-        font-size: 18px;
-    }
+/*!* Petits écrans (max 480px) *!*/
+/*@media (max-width: 480px) {*/
+/*    nav a {*/
+/*        font-size: 18px;*/
+/*    }*/
 
-    .userIcon {
-        width: 30px;
-    }
+/*    .userIcon {*/
+/*        width: 30px;*/
+/*    }*/
 
-    footer {
-        font-size: 14px;
-    }
-}
+/*    footer {*/
+/*        font-size: 14px;*/
+/*    }*/
+

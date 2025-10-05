@@ -14,8 +14,9 @@
     </div>
 
     <div class="login-container">
+        <div class="login-form">
         <form action="?page=login" method="post" class="login-form">
-            <h2>Connexion</h2>
+                <h2>Connexion</h2>
             <?php
             session_start();
             if (!empty($_SESSION['erreur'])) : ?>
@@ -24,16 +25,20 @@
                 unset($_SESSION['erreur']);
             endif;
             ?>
-            <label for="identifiant">Email</label>
-            <input type="email" name="identifiant" id="identifiant" placeholder="juldetp@d&p.com" required>
+                <label for="identifiant">Email</label>
+                <input type="email" name="identifiant" id="identifiant" placeholder="juldetp@d&p.com" required>
 
-            <label for="mot_de_passe">Mot de passe</label>
-            <input type="password" name="mot_de_passe" id="mot_de_passe" placeholder="LeJC'estle100!!" required>
+                <label for="mot_de_passe">Mot de passe</label>
+                <input type="password" name="mot_de_passe" id="mot_de_passe" placeholder="LeJC'estle100!!" required>
 
-            <button type="submit">Se connecter</button>
-            <p class="forgot"><a href=<?= BASE_URL ?>index.php?page=forgot>Mot de passe oublié ?</a></p>
-            <p>Pas encore de compte ? <a href="<?= BASE_URL ?>index.php?page=sInscrire">Crée le maintenant</a></p>
-        </form>
+                <button type="submit">Se connecter</button>
+                <p class="forgot">
+                    <a href="<?= BASE_URL ?>/index.php?page=home">Retour à la l'accueil</a>
+                    <a href=<?= BASE_URL ?>index.php?page=forgot>Mot de passe oublié ?</a>
+                </p>
+                <p>Pas encore de compte ? <a href="<?= BASE_URL ?>index.php?page=sInscrire">Crée le maintenant</a></p>
+            </form>
+        </div>
     </div>
 </body>
 
