@@ -11,9 +11,17 @@ if (is_dir($dirDisk)) {
        
 
         $slug = pathinfo($file, PATHINFO_FILENAME); // nom sans .blabla
+        $displayName = ($slug === 'accueil') ? 'Home' : $slug;
 
         if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter','mdpRnit','mdpOublie'], true)) continue;
-
+        
+        if ($slug === 'accueil') {
+            $displayName = 'Accueil';   
+            $linkSlug    = 'home';     
+        } else {
+            $displayName = $slug;     
+            $linkSlug    = $slug;       
+        }
         $pages[] = [
             'name' => $slug,
             'url'  => BASE_URL . '/?page=' . rawurlencode($slug),
