@@ -48,7 +48,8 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
     'forgot' => PAGES_PATH . '/mdpOublie.php',
     'send_reset' => CONTROLLERS_PATH . '/mdpOublieController.php',
     'password_reset' => PAGES_PATH . '/mdpRenit.php',
-    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php'];
+    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php',
+    'planDuSite' => CONTROLLERS_PATH. '/planDuSiteController.php'];
 
 // Récupérer le paramètre 'page', sinon définir 'home' par défaut
 $page = filter_input(INPUT_GET, 'page') ?? 'home';
