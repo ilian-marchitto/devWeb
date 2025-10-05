@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/config.php';
+require_once BASE_PATH . '/local.php';
 
 session_start();
 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row['email'] === $email) {
             $unique = false;
             $_SESSION['erreuremail'] = 'Email déjà utilisé';
-            header("Location:". BASE_URL . "index.php?page=sInscrire");
+            header("Location:". BASE_URL . "/index.php?page=sInscrire");
             exit;
         }
     }
@@ -43,11 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]);
 
             $_SESSION["firstname"] = $firstname;
-            header("Location:" . BASE_URL . "index.php?page=bienvenue");
+            $_SESSION["email"] = $email;
+            header("Location:" . BASE_URL . "/index.php?page=bienvenue");
             exit;
         } catch (PDOException $e) {
             echo "Erreur d'insertion : " . $e->getMessage();
-            header("Location:". BASE_URL . "index.php?page=sInscrire");
+            header("Location:". BASE_URL . "/index.php?page=sInscrire");
             exit;
         }
     }

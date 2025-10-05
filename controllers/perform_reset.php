@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once BASE_PATH . '/config.php';
 require_once MODELS_PATH . '/UserModels.php';
 require_once PHPMAILER_PATH . '/PHPMailer.php';
 require_once PHPMAILER_PATH . '/SMTP.php';

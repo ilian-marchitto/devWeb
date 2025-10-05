@@ -33,10 +33,10 @@
 
                 <button type="submit">Se connecter</button>
                 <p class="forgot">
-                    <a href="<?= BASE_URL ?>index.php?page=home">Retour à la l'accueil</a>
-                    <a href=<?= BASE_URL ?>index.php?page=forgot>Mot de passe oublié ?</a>
+                    <a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a>
+                    <a href=<?= BASE_URL ?>/index.php?page=forgot>Mot de passe oublié ?</a>
                 </p>
-                <p>Pas encore de compte ? <a href="<?= BASE_URL ?>index.php?page=sInscrire">Crée le maintenant</a></p>
+                <p>Pas encore de compte ? <a href="<?= BASE_URL ?>/index.php?page=sInscrire">Crée le maintenant</a></p>
             </form>
         </div>
     </div>

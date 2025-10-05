@@ -26,21 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["email"]     = $user["email"];
                 $_SESSION["firstname"] = $user["firstname"];
 
-                header("Location:". BASE_URL . "index.php?page=bienvenue");
+                header("Location:". BASE_URL . "/index.php?page=bienvenue");
                 exit;
             } else {
                 $_SESSION['erreur'] = "Identifiant ou mot de passe incorrect.";
-                header("Location:". BASE_URL . "index.php?page=seConnecter");
+                header("Location:". BASE_URL . "/index.php?page=seConnecter");
                 exit;
             }
         } catch (PDOException $e) {
             $_SESSION['erreur'] = "Erreur lors de la connexion : " . $e->getMessage();
-            header("Location:". BASE_URL . "index.php?page=seConnecter");
+            header("Location:". BASE_URL . "/index.php?page=seConnecter");
             exit;
         }
     } else {
         $_SESSION['erreur'] = "Veuillez remplir tous les champs.";
-        header("Location:". BASE_URL . "index.php?page=seConnecter");
+        header("Location:". BASE_URL . "/index.php?page=seConnecter");
         exit;
     }
 }
