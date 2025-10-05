@@ -3,28 +3,28 @@
 
 $pageTitle = "Plan du site";
 
-$directory = __DIR__ . '/../views/pages';
+$dirDisk = __DIR__ . '/../views/pages';       
+$dirWeb  = dirname($_SERVER['SCRIPT_NAME']);   
+$pagesUrlPrefix = $dirWeb . '/../views/pages';
+
 $pages = [];
 
-
-$ignoreFiles = ['passwordreset.php', 'forgot.php'];
-
-if (is_dir($directory)) {
-    $files = scandir($directory);
+if (is_dir($dirDisk)) {
+    $files = scandir($dirDisk);
 
     foreach ($files as $file) {
-        if ($file === '.' || $file === '..') continue;
+        
+                
+        if (in_array($file, ['passwordreset.php','forgot.php'], true)) continue;
 
-        if (in_array($file, $ignoreFiles, true)) continue; //fichiers  ignorés
-
-        // Ajoute la page dans le tableau
         $pages[] = [
-            'name' => pathinfo($file, PATHINFO_FILENAME), // nom sans les .blabla
-            'path' => 'views/pages/' . $file             
+            'name' => pathinfo($file, PATHINFO_FILENAME),       // nom sans .blablabla
+            'url'  => $pagesUrlPrefix . '/' . $file             // URL relative depuis l’URL du contrôleur
         ];
     }
-} else {
-    $pages = [];
+
+    // tri par nom
+    usort($pages, fn($a,$b) => strcasecmp($a['name'], $b['name']));
 }
 
 require __DIR__ . '/../views/pages/planDuSite.php';
