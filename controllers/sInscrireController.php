@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/local.php';
+require_once BASE_PATH . '/config.php';
 
 session_start();
 
