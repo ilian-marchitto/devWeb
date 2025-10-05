@@ -14,7 +14,7 @@ if (is_dir($dirDisk)) {
 
         if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter'], true)) continue;
 
-=        $pages[] = [
+        $pages[] = [
             'name' => $slug,
             'url'  => BASE_URL . '/?page=' . rawurlencode($slug),
         ];
