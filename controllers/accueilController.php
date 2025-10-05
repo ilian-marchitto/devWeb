@@ -35,7 +35,7 @@ $fontItems   = $header->getFontItems();
 // ==========================
 // Inclusion des vues
 // ==========================
-require_once LAYOUT_PATH . '/Head.php';
+require_once LAYOUT_PATH . '/head.php';
 require_once LAYOUT_PATH . '/header.php';
 require_once PAGES_PATH . '/accueil.php';
 require_once LAYOUT_PATH . '/footer.php';
