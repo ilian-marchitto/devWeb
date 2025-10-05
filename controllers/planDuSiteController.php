@@ -1,30 +1,26 @@
 <?php
 
-
 $pageTitle = "Plan du site";
 
-$dirDisk = __DIR__ . '/../views/pages';       
-$dirWeb  = dirname($_SERVER['SCRIPT_NAME']);   
-$pagesUrlPrefix = $dirWeb . '/../views/pages';
-
-$pages = [];
+$dirDisk = VIEWS_PATH . '/pages';
+$pages   = [];
 
 if (is_dir($dirDisk)) {
-    $files = scandir($dirDisk);
+    foreach (scandir($dirDisk) as $file) {
+        if ($file[0] === '.') continue;                  
+       
 
-    foreach ($files as $file) {
-        
-                
-        if (in_array($file, ['passwordreset.php','forgot.php'], true)) continue;
+        $slug = pathinfo($file, PATHINFO_FILENAME); // nom sans .blabla
 
-        $pages[] = [
-            'name' => pathinfo($file, PATHINFO_FILENAME),       // nom sans .blablabla
-            'url'  => $pagesUrlPrefix . '/' . $file             // URL relative depuis l’URL du contrôleur
+        if (in_array($slug, ['bienvenue','forgot','password_reset','seDeconnecter'], true)) continue;
+
+=        $pages[] = [
+            'name' => $slug,
+            'url'  => BASE_URL . '/?page=' . rawurlencode($slug),
         ];
     }
 
-    // tri par nom
     usort($pages, fn($a,$b) => strcasecmp($a['name'], $b['name']));
 }
 
-require __DIR__ . '/../views/pages/planDuSite.php';
+require VIEWS_PATH . '/pages/planDuSite.php';
