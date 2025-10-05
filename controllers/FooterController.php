@@ -17,4 +17,3 @@ class FooterController extends Builder
 // Créer l’instance de Footer
 $footer = new FooterController();
 
-require_once LAYOUT_PATH . '/footer.php';
