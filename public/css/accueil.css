@@ -103,57 +103,188 @@ footer {
     display: block;
 }
 
+
+/* ----- SECTION ALBUMS ----- */
+
+#Albums {
+    padding: 100px 5% 60px; /* espace sous la nav fixe */
+    color: #fff;
+    text-align: center;
+}
+
+#Albums h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Grille d'albums */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    justify-items: center;
+}
+
+.album-grid figure {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    max-width: 250px;
+}
+
+.album-grid figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+}
+
+.album-grid img {
+    width: 100%;
+    border-radius: 10px;
+    height: auto;
+    display: block;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* ----- PAGINATION ----- */
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination a {
+    padding: 10px 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ff9800;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.pagination a:hover {
+    background-color: #ff9800;
+    color: #000;
+}
+
+.pagination a.active {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* ----- RESPONSIVE album ----- */
+
+@media (max-width: 992px) {
+    #Albums h1 {
+        font-size: 32px;
+    }
+
+    .album-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #Albums {
+        padding: 80px 3% 50px;
+    }
+
+    .album-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .pagination a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #Albums h1 {
+        font-size: 26px;
+    }
+
+    .album-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+}
+
+
+
 /* ----- RESPONSIVE DESIGN ----- */
 
-/* Tablettes (max 992px) */
-/*@media (max-width: 992px) {*/
-/*    nav a {*/
-/*        font-size: 24px;*/
-/*    }*/
-/*    nav li {*/
-/*        padding: 15px;*/
-/*    }*/
-/*    .userIcon {*/
-/*        width: 35px;*/
-/*    }*/
-/*}*/
+/* Masquer la nav classique et afficher hamburger sur écrans <900px */
+@media (max-width: 900px) {
 
-/*!* Mobiles (max 768px) *!*/
-/*@media (max-width: 768px) {*/
-/*    nav ul {*/
-/*        flex-direction: column; !* nav verticale *!*/
-/*        align-items: stretch;*/
-/*    }*/
+    /* Masquer le menu par défaut */
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -250px; /* hors écran */
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.53);
+        padding-top: 20px;
+        transition: left 0.3s ease; /* animation du glissement */
+        z-index: 1500;
+        list-style: none;
+    }
 
-/*    nav li {*/
-/*        text-align: center;*/
-/*        padding: 15px 0;*/
-/*        width: 100%;*/
-/*        border-bottom: 1px solid #222;*/
-/*    }*/
+    /* Quand la checkbox est cochée, afficher le menu */
+    .hamburger:checked ~ nav ul {
+        left: 0; /* menu visible */
+    }
 
-/*    nav a {*/
-/*        font-size: 20px;*/
-/*    }*/
+    /* Hamburger visible sur mobile */
+    .hamburger-label {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 15px;
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        z-index: 2001;
+    }
 
-/*    footer {*/
-/*        flex-direction: column;*/
-/*        gap: 10px;*/
-/*        text-align: center;*/
-/*    }*/
-/*}*/
+    .hamburger-label span {
+        height: 3px;
+        width: 25px;
+        background: white;
+        margin-bottom: 5px;
+        border-radius: 2px;
+    }
 
-/*!* Petits écrans (max 480px) *!*/
-/*@media (max-width: 480px) {*/
-/*    nav a {*/
-/*        font-size: 18px;*/
-/*    }*/
+    nav li {
+        margin-top: 50px;
+        text-align: left;
+        width: 80%;
+        padding: 15px;
+        border-bottom: 1px solid #222;
+    }
 
-/*    .userIcon {*/
-/*        width: 30px;*/
-/*    }*/
+    nav a {
+        font-size: 25px;
+    }
 
-/*    footer {*/
-/*        font-size: 14px;*/
-/*    }*/
-
+}

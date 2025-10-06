@@ -16,7 +16,7 @@ $message = '';
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $error = "Aucune donnée reçue.";
-    include PAGES_PATH.'/forgot.php';
+    include PAGES_PATH.'/mdpOublie.php';
     exit;
 }
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $email = trim($_POST['email'] ?? '');
 if (!$email) {
     $error = "Email requis.";
-    include PAGES_PATH.'/forgot.php';
+    include PAGES_PATH.'/mdpOublie.php';
     exit;
 }
 
@@ -71,4 +71,4 @@ if ($userData) {
 }
 
 // Charger la vue
-include PAGES_PATH.'/forgot.php';
+include PAGES_PATH.'/mdpOublie.php';

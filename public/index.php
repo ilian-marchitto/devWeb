@@ -45,10 +45,11 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
     'logout' => CONTROLLERS_PATH . '/seDeconnecterController.php',
     'signup' => CONTROLLERS_PATH . '/sInscrireController.php',
     'login' => CONTROLLERS_PATH . '/seConnecterController.php',
-    'forgot' => PAGES_PATH . '/forgot.php',
-    'send_reset' => CONTROLLERS_PATH . '/forgotController.php',
-    'password_reset' => PAGES_PATH . '/password_reset.php',
-    'perform_reset' => CONTROLLERS_PATH . '/perform_reset.php'];
+    'forgot' => PAGES_PATH . '/mdpOublie.php',
+    'send_reset' => CONTROLLERS_PATH . '/mdpOublieController.php',
+    'password_reset' => PAGES_PATH . '/mdpRenit.php',
+    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php',
+    'planDuSite' => CONTROLLERS_PATH. '/planDuSiteController.php'];
 
 // Récupérer le paramètre 'page', sinon définir 'home' par défaut
 $page = filter_input(INPUT_GET, 'page') ?? 'home';

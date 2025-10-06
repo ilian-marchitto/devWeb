@@ -54,5 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
     }
-    include PAGES_PATH . '/password_reset.php';
+    include PAGES_PATH . '/mdpRenit.php';
 }
