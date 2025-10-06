@@ -186,7 +186,7 @@ figcaption {
     border-color: #fff;
 }
 
-/* ----- RESPONSIVE ----- */
+/* ----- RESPONSIVE album ----- */
 
 @media (max-width: 992px) {
     #Albums h1 {
@@ -229,57 +229,62 @@ figcaption {
 }
 
 
+
 /* ----- RESPONSIVE DESIGN ----- */
 
-/* Tablettes (max 992px) */
-/*@media (max-width: 992px) {*/
-/*    nav a {*/
-/*        font-size: 24px;*/
-/*    }*/
-/*    nav li {*/
-/*        padding: 15px;*/
-/*    }*/
-/*    .userIcon {*/
-/*        width: 35px;*/
-/*    }*/
-/*}*/
+/* Masquer la nav classique et afficher hamburger sur écrans <900px */
+@media (max-width: 900px) {
 
-/*!* Mobiles (max 768px) *!*/
-/*@media (max-width: 768px) {*/
-/*    nav ul {*/
-/*        flex-direction: column; !* nav verticale *!*/
-/*        align-items: stretch;*/
-/*    }*/
+    /* Masquer le menu par défaut */
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -250px; /* hors écran */
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.53);
+        padding-top: 20px;
+        transition: left 0.3s ease; /* animation du glissement */
+        z-index: 1500;
+        list-style: none;
+    }
 
-/*    nav li {*/
-/*        text-align: center;*/
-/*        padding: 15px 0;*/
-/*        width: 100%;*/
-/*        border-bottom: 1px solid #222;*/
-/*    }*/
+    /* Quand la checkbox est cochée, afficher le menu */
+    .hamburger:checked ~ nav ul {
+        left: 0; /* menu visible */
+    }
 
-/*    nav a {*/
-/*        font-size: 20px;*/
-/*    }*/
+    /* Hamburger visible sur mobile */
+    .hamburger-label {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 15px;
+        position: fixed;
+        top: 15px;
+        left: 20px;
+        z-index: 2001;
+    }
 
-/*    footer {*/
-/*        flex-direction: column;*/
-/*        gap: 10px;*/
-/*        text-align: center;*/
-/*    }*/
-/*}*/
+    .hamburger-label span {
+        height: 3px;
+        width: 25px;
+        background: white;
+        margin-bottom: 5px;
+        border-radius: 2px;
+    }
 
-/*!* Petits écrans (max 480px) *!*/
-/*@media (max-width: 480px) {*/
-/*    nav a {*/
-/*        font-size: 18px;*/
-/*    }*/
+    nav li {
+        margin-top: 50px;
+        text-align: left;
+        width: 80%;
+        padding: 15px;
+        border-bottom: 1px solid #222;
+    }
 
-/*    .userIcon {*/
-/*        width: 30px;*/
-/*    }*/
+    nav a {
+        font-size: 25px;
+    }
 
-/*    footer {*/
-/*        font-size: 14px;*/
-/*    }*/
-
+}
