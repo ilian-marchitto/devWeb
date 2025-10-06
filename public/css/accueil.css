@@ -211,6 +211,49 @@ figcaption {
 }
 
 
+/* ----- RESPONSIVE album ----- */
+
+@media (max-width: 992px) {
+    #Albums h1 {
+        font-size: 32px;
+    }
+
+    .album-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #Albums {
+        padding: 80px 3% 50px;
+    }
+
+    .album-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .pagination a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #Albums h1 {
+        font-size: 26px;
+    }
+
+    .album-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+}
+
+
 
 /* ----- RESPONSIVE DESIGN ----- */
 
