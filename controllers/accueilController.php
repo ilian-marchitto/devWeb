@@ -6,6 +6,9 @@ require_once CONTROLLERS_PATH . '/HeadController.php';
 require_once CONTROLLERS_PATH . '/HeaderController.php';
 require_once CONTROLLERS_PATH . '/FooterController.php';
 
+require_once MODELS_PATH . '/AlbumModel.php';
+
+
 // ==========================
 // Variables spécifiques à la page
 // ==========================
@@ -32,6 +35,31 @@ $navItems    = $header->getNavItems();
 $buttonItems = $header->getButtonItems();
 $fontItems   = $header->getFontItems();
 
+
+
+$albumModel = new AlbumModel($connection);
+$rows = $albumModel->getAllAlbums();
+
+$albums = array_map(function ($r) {
+    return [
+        'title' => (string)$r['titlealbum'],
+        'img'   => AlbumModel::imageUrl((string)$r['imgalbum']),
+        'link'  => (string)$r['linkalbum'],
+    ];
+}, $rows);
+
+
+// Pagination
+$perPage = 5;
+$totalAlbums = count($albums);
+$totalPages = ceil($totalAlbums / $perPage);
+
+$page = isset($_GET['p']) ? max(1, (int)$_GET['p']) : 1;
+if ($page > $totalPages) $page = $totalPages;
+
+$start = ($page - 1) * $perPage;
+$pageAlbums = array_slice($albums, $start, $perPage);
+
 // ==========================
 // Inclusion des vues
 // ==========================
@@ -39,3 +67,7 @@ require_once LAYOUT_PATH . '/head.php';
 require_once LAYOUT_PATH . '/header.php';
 require_once PAGES_PATH . '/accueil.php';
 require_once LAYOUT_PATH . '/footer.php';
+
+?>
+
+

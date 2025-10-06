@@ -126,6 +126,92 @@ footer {
     display: block;
 }
 
+
+
+/* ----- SECTION ALBUMS ----- */
+
+#Albums {
+    padding: 100px 5% 60px; /* espace sous la nav fixe */
+    color: #fff;
+    text-align: center;
+}
+
+#Albums h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Grille d'albums */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    justify-items: center;
+}
+
+.album-grid figure {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    max-width: 250px;
+}
+
+.album-grid figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+}
+
+.album-grid img {
+    width: 100%;
+    border-radius: 10px;
+    height: auto;
+    display: block;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* ----- PAGINATION ----- */
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination a {
+    padding: 10px 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ff9800;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.pagination a:hover {
+    background-color: #ff9800;
+    color: #000;
+}
+
+.pagination a.active {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+
+
 /* ----- RESPONSIVE DESIGN ----- */
 
 /* Masquer la nav classique et afficher hamburger sur écrans <900px */

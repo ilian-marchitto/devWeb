@@ -7,16 +7,28 @@
     <h1> DES </h1>
     <p> blablablabla </p>
 </section>
-<section id="Albums" class="albums-section">
-    <h1> ALBUMS </h1>
-    <section>
-        <figure><figcaption>Photo 1 : description</figcaption></figure>
-        <figure><figcaption>Photo 2 : description</figcaption></figure>
-        <figure><figcaption>Photo 3 : description</figcaption></figure>
-        <figure><figcaption>Photo 4 : description</figcaption></figure>
-        <figure><figcaption>Photo 5 : description</figcaption></figure>
-        <figure><figcaption>Photo 6 : description</figcaption></figure>
-    </section>
+<section id="Albums">
+  <h1>ALBUMS</h1>
+
+  <div class="album-grid">
+  <?php foreach ($pageAlbums as $album): ?>
+    <figure>
+      <a href="<?= htmlspecialchars($album['link']) ?>" target="_blank" rel="noopener">
+        <img src="<?= htmlspecialchars($album['img']) ?>" alt="<?= htmlspecialchars($album['title']) ?>">
+      </a>
+      <figcaption><?= htmlspecialchars($album['title']) ?></figcaption>
+    </figure>
+  <?php endforeach; ?>
+</div>
+
+
+  <div class="pagination">
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+      <a href="?page=home&p=<?= $i ?>#Albums" class="<?= $i == $page ? 'active' : '' ?>">
+         <?= $i ?>
+        </a>
+    <?php endfor; ?>
+  </div>
 </section>
 <section id="Actualite">
     <h1> ACTU </h1>
