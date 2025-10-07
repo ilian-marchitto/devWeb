@@ -86,6 +86,7 @@ nav a:hover {
 footer {
     display: flex;
     align-items: center;
+    justify-content: left;
     padding: 20px;
     gap: 10%;
     bottom: 0;
@@ -136,6 +137,99 @@ footer {
 .toggle-checkbox:checked + label + .dropdown-content {
     display: block;
 }
+
+
+/* ----- SECTION ALBUMS ----- */
+
+#Albums {
+    padding: 100px 5% 60px; /* espace sous la nav fixe */
+    color: #fff;
+    text-align: center;
+}
+
+#Albums h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Grille d'albums */
+.album-grid {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.album-grid figure {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    max-width: 250px;
+}
+
+.album-grid figure:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+}
+
+.album-grid img {
+    width: 100%;
+    border-radius: 10px;
+    height: auto;
+    display: block;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.iconFleche {
+display: none;
+}
+
+/* ----- PAGINATION ----- */
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination a {
+    padding: 10px 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ff9800;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.pagination a:hover {
+    background-color: #ff9800;
+    color: #000;
+}
+
+.pagination a.active {
+    background-color: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
 
 /* ----- RESPONSIVE DESIGN ----- */
 
@@ -211,6 +305,19 @@ footer {
         justify-content: center; /* centre horizontalement */
         align-items: center;     /* centre verticalement */
         background-size: cover;  /* adapte l'image à tout l'écran */
+    }
+
+    .album-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .iconFleche {
+        position: absolute;
+        bottom: 20px;
+        display: block;
     }
 
 }
