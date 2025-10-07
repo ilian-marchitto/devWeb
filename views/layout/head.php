@@ -9,11 +9,11 @@
         <meta name="description" content="<?= htmlspecialchars($description) ?>">
     <?php endif; ?>
 
-    <?php if(!empty($keywords)): ?>
-        <meta name="keywords" content="<?= htmlspecialchars($keywords) ?>">
+    <?php if(!empty($pageKeywords)): ?>
+        <meta name="keywords" content="<?= htmlspecialchars($pageKeywords) ?>">
     <?php endif; ?>
 
-    <meta name="author" content="<?= htmlspecialchars($author) ?>">
+    <meta name="author" content="<?= htmlspecialchars($pageAuthor) ?>">
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

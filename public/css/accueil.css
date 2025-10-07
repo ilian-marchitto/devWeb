@@ -66,10 +66,21 @@ nav a:hover {
 }
 
 /* ----- IMAGE DE FOND ----- */
-.imageFont img {
-    width: 100%;
+.imageFontDesktop img {
+    width:100%;
     height: auto;
 }
+
+.imageFontMobile {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
 
 /* ----- FOOTER ----- */
 footer {
@@ -107,7 +118,7 @@ footer {
     display: none;
     position: absolute;
     right: 0;
-    min-width: 125px;
+    min-width: 120px;
     background-color: #fff;
     padding: 10px;
     border-radius: 6px;
@@ -181,6 +192,25 @@ footer {
 
     nav a {
         font-size: 25px;
+    }
+
+    .imageFontDesktop img {
+        display: none;
+    }
+
+    .imageFontMobile {
+        display:block;
+    }
+
+    header {
+        width: 100vw;    /* toute la largeur de l'écran */
+        height: 100vh;   /* toute la hauteur de l'écran */
+        position: relative; /* pour que les éléments en absolute soient positionnés par rapport au header */
+        overflow: hidden;   /* optionnel, pour éviter les débordements */
+        display: flex;      /* pour centrer facilement les éléments enfants */
+        justify-content: center; /* centre horizontalement */
+        align-items: center;     /* centre verticalement */
+        background-size: cover;  /* adapte l'image à tout l'écran */
     }
 
 }

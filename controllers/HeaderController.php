@@ -19,13 +19,14 @@ class HeaderController
         $this->buttonHtml = new Builder();
 
         // Liens de nav
-        $this->nav->addItemsLink("Communaute", "#communaute");
-        $this->nav->addItemsLink("Description", "#description");
-        $this->nav->addItemsLink("Albums", "#albums");
-        $this->nav->addItemsLink("Actualite", "#actualite");
+        $this->nav->addItemsLink("Communaute", "#Communaute");
+        $this->nav->addItemsLink("Description", "#Description");
+        $this->nav->addItemsLink("Albums", "#Albums");
+        $this->nav->addItemsLink("Actualite", "#Actualite");
 
         // Logo (par exemple)
-        $this-> font-> addItemPicture(IMAGES_URL . '/fontJul.png', '#', 'ImageFont', 'imageFont');
+        $this-> font-> addItemPicture(IMAGES_URL . '/fontDeJul.webp', '#', 'ImageFont', 'imageFontDesktop');
+        $this-> font-> addItemPicture(IMAGES_URL . '/fontJulMobile.png', '#', 'ImageFont', 'imageFontMobile');
         // Bouton connexion / déconnexion
         if ($isLoggedIn) {
             $this->buttonHtml->addItemsLink("Se déconnecter", BASE_URL . '/index.php?page=logout');
