@@ -7,7 +7,7 @@ require_once CONTROLLERS_PATH . '/HeaderController.php';
 require_once CONTROLLERS_PATH . '/FooterController.php';
 
 require_once MODELS_PATH . '/AlbumModel.php';
-
+require_once MODELS_PATH . '/ItemModel.php';
 
 // ==========================
 // Variables spécifiques à la page
@@ -35,6 +35,9 @@ $navItems    = $header->getNavItems();
 $buttonItems = $header->getButtonItems();
 $fontItems   = $header->getFontItems();
 
+//Recuperation du nombres de compte dans la base
+$itemsData = new ItemModel($connection);
+$numberUser = $itemsData -> countUserAccount();
 
 
 $albumModel = new AlbumModel($connection);

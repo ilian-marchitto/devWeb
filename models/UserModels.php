@@ -37,5 +37,7 @@ class UserModel {
         );
         $stmt->execute([$hash, $email]);
     }
+
+
 }
 

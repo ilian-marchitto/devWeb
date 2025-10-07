@@ -70,6 +70,12 @@ nav a:hover {
     width:100%;
     height: auto;
 }
+.imageFontDesktop a {
+    display: inline-block;  /* permet au background de s'afficher */
+    padding: 5px;           /* espace autour du contenu */
+    background-color: #222;
+}
+
 
 .imageFontMobile {
     display: none;
@@ -141,18 +147,17 @@ footer {
 
 /* ----- SECTION ALBUMS ----- */
 
-#Albums {
-    padding: 100px 5% 60px; /* espace sous la nav fixe */
-    color: #fff;
-    text-align: center;
-}
-
-#Albums h1 {
+#Albums h1, #Communaute h1 {
+    margin-block-start: 0;
     font-size: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
     letter-spacing: 2px;
     text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
+
 
 /* Grille d'albums */
 .album-grid {
@@ -182,6 +187,39 @@ footer {
     border-radius: 10px;
     height: auto;
     display: block;
+}
+
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.effectifTeamJul {
+    margin: 0;
+    font-size: 50px;
+}
+
+#Communaute {
+    background-color: #222222;
+}
+
+#Communaute p {
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.compteur {
+    font-size: 50px;
+    color: white;
+    text-decoration-color: #222222;
 }
 
 html {
@@ -296,7 +334,14 @@ display: none;
         display:block;
     }
 
+    body, header, section, h1 {
+        margin: 0;
+        padding: 0;
+    }
+
     header {
+        margin: 0;
+        padding: 0;
         width: 100vw;    /* toute la largeur de l'écran */
         height: 100vh;   /* toute la hauteur de l'écran */
         position: relative; /* pour que les éléments en absolute soient positionnés par rapport au header */

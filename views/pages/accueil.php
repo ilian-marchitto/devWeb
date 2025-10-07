@@ -1,7 +1,9 @@
 <!-- Contenu de la page -->
 <section id="Communaute">
     <h1> COMMU </h1>
-    <p> blablablabla </p>
+    <p class="effectifTeamJul"> Effectif de la team Jul : </p>
+    <p> Créer un compte pour faire augmenter le compteur !</p>
+    <p class="compteur"> <?php echo $numberUser?> </p>
 </section>
 <section id="Description">
     <h1> DES </h1>
