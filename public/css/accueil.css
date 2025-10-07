@@ -207,10 +207,11 @@ figcaption {
 }
 
 #Communaute {
-    background-color: #222222;
+    background-color: #000000;
 }
 
 #Communaute p {
+    color: white;
     margin-top: 0;
     text-align: center;
     text-transform: uppercase;
@@ -219,7 +220,6 @@ figcaption {
 .compteur {
     font-size: 50px;
     color: white;
-    text-decoration-color: #222222;
 }
 
 html {

@@ -26,7 +26,7 @@ class HeaderController
 
         // Logo (par exemple)
         $this-> font-> addItemPicture(IMAGES_URL . '/fontDeJul.webp', '#', 'ImageFont', 'imageFontDesktop');
-        $this-> font-> addItemPicture(IMAGES_URL . '/fontJulMobile.webp', '#', 'ImageFont', 'imageFontMobile');
+        $this-> font-> addItemPicture(IMAGES_URL . '/fontJulMobile.png', '#', 'ImageFont', 'imageFontMobile');
         $this -> font -> addItemPicture(IMAGES_URL.'/iconFleche.png', '#Communaute', 'Icon Fleche', 'iconFleche');
         // Bouton connexion / déconnexion
         if ($isLoggedIn) {
