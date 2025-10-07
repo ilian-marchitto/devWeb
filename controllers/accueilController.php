@@ -42,9 +42,9 @@ $rows = $albumModel->getAllAlbums();
 
 $albums = array_map(function ($r) {
     return [
-        'title' => (string)$r['titlealbum'],
-        'img'   => AlbumModel::imageUrl((string)$r['imgalbum']),
-        'link'  => (string)$r['linkalbum'],
+        'title' => (string)$r['titlea'],
+        'img'   => AlbumModel::imageUrl((string)$r['imga']),
+        'link'  => (string)$r['linka'],
     ];
 }, $rows);
 
