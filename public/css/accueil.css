@@ -6,6 +6,10 @@ body {
     font-family: "Oswald", sans-serif;
 }
 
+body {
+    font-family: "Oswald", sans-serif;
+}
+
 .oswald {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
@@ -189,7 +193,10 @@ h1 {
     display: block;
 }
 
-
+p {
+    font-size: 20px;
+    text-align: justify;
+}
 
 html {
     scroll-behavior: smooth;
@@ -207,7 +214,7 @@ figcaption {
 }
 
 #Communaute {
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.67);
 }
 
 #Communaute p {
