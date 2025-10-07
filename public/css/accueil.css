@@ -147,7 +147,7 @@ footer {
 
 /* ----- SECTION ALBUMS ----- */
 
-#Albums h1, #Communaute h1 {
+h1 {
     margin-block-start: 0;
     font-size: 40px;
     margin-bottom: 0;

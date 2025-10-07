@@ -6,8 +6,15 @@
     <p class="compteur"> <?php echo $numberUser?> </p>
 </section>
 <section id="Description">
-    <h1> DES </h1>
-    <p> blablablabla </p>
+    <h1> DESCRIPTION </h1>
+    <p> Bienvenue sur **Fan2Jul**, le site entièrement dédié à l’univers de **Jul**, l’artiste marseillais qui a marqué le rap français par son style unique et son énergie incomparable.
+        Ici, tu pourras découvrir ses albums, suivre l’actualité de sa carrière, et rejoindre la communauté des fans qui partagent la même passion pour sa musique.
+
+        Ce site a été réalisé dans le cadre d’un **projet étudiant à l’IUT d’Informatique d’Aix-en-Provence**.
+        Notre objectif : créer une plateforme moderne, interactive et fidèle à l’esprit de Jul, tout en mettant en pratique nos compétences en développement web — du design de l’interface à la gestion de base de données.
+
+        **Fan2Jul**, c’est avant tout un projet de passion et de technique : une vitrine de notre travail d’étudiants, mais aussi un espace convivial pour tous les fans du J.
+    </p>
 </section>
 <section id="Albums">
   <h1>ALBUMS</h1>
