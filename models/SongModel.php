@@ -1,0 +1,58 @@
+<?php
+
+require_once BASE_PATH . '/config.php';
+
+class SongModel {
+    public function __construct(PDO $connection) {
+        $this->pdo = $connection;
+    }
+
+    // ─────────────── CREATE ───────────────
+    public function createSong(string $title, string $url): bool {
+        $sql = "INSERT INTO songs (title, url)
+                VALUES (:title, :url)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            ':title' => $title,
+            ':url'   => $url
+        ]);
+    }
+
+    // ─────────────── READ ───────────────
+    public function getSongById(int $ids): ?array {
+        $sql = "SELECT ids, title, url 
+                FROM songs 
+                WHERE ids = :ids LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':ids' => $ids]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    public function getAllSongs(): array {
+        $sql = "SELECT ids, title, url 
+                FROM songs 
+                ORDER BY ids ASC";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // ─────────────── UPDATE ───────────────
+    public function updateSong(int $ids, string $title, string $url): bool {
+        $sql = "UPDATE songs 
+                SET title = :title, url = :url 
+                WHERE ids = :ids LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            ':title' => $title,
+            ':url'   => $url,
+            ':ids'   => $ids
+        ]);
+    }
+
+    // ─────────────── DELETE ───────────────
+    public function deleteSong(int $ids): bool {
+        $sql = "DELETE FROM songs WHERE ids = :ids LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':ids' => $ids]);
+    }
+}
