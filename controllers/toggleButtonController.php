@@ -35,7 +35,7 @@ class ToggleButtonController
             $homeUrl = 'https://fan2jul.alwaysdata.net/index.php?page=home';
             header("Location: $homeUrl");
             exit;
-        }
+        
         }
 
         // --- 2. Initialisation du style au premier chargement ---
