@@ -13,11 +13,11 @@ $styleDynamique = toggleButtonController::getActiveStyle();
 // ==========================
 
 
-$pageTitle = "Se connecter";
-$pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Connectez-vous pour découvrir la communauté, les albums et l'actualité.";
-$pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, connexion";
+$pageTitle = "Se deconnecter";
+$pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Deconnectez-vous en toutes sécurités.";
+$pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, deconnexion";
 $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-$pageCss = ["seConnecter.css", $styleDynamique]; // Fichier CSS spécifique à la page
+$pageCss = ["seDeconnecter.css", $styleDynamique]; // Fichier CSS spécifique à la page
 
 // ==========================
 // Contrôleur Head
@@ -25,7 +25,7 @@ $pageCss = ["seConnecter.css", $styleDynamique]; // Fichier CSS spécifique à l
 $head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
 
 require_once LAYOUT_PATH . '/head.php';
-require_once PAGES_PATH . '/seConnecter.php';
+require_once PAGES_PATH . '/seDeconnecter.php';
 
 $initiale = '';
 
