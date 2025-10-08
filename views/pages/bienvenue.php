@@ -1,22 +1,6 @@
-<?php
-session_start();
 
-if (!isset($_SESSION['firstname'])) {
-    header("Location: " . BASE_URL . "/index.php?page=seConnecter");
-    exit;
-}
-
-$prenom = $_SESSION['firstname'];
-$initiale = strtoupper(substr($prenom, 0, 1));
-?>
-<!DOCTYPE html>
-<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenue</title>
-    <link rel="stylesheet" href="<?= CSS_URL ?>/bienvenue.css">
     <meta http-equiv="refresh" content="1;url=<?= BASE_URL ?>/index.php?page=home">
 </head>
 
