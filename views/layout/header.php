@@ -31,4 +31,7 @@
             <?php endforeach; ?>
         </di>
     </div>
+     <a href="?toggle_style=1" class="toggle-theme-btn">
+        <span class="toggle-switch"></span>
+    </a>
 </header>

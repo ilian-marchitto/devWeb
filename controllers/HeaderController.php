@@ -2,7 +2,7 @@
 // controllers/HeaderController.php
 
 include CONTROLLERS_PATH . '/Builder.php';
-session_start();
+require_once  CONTROLLERS_PATH .'/toggleButtonController.php';
 
 $isLoggedIn = isset($_SESSION['email']);
 
@@ -52,6 +52,7 @@ class HeaderController
 }
 
 $header = new HeaderController($isLoggedIn);
+$toggleButton = new toggleButtonController();
 
 // Récupération des items à passer à la vue
 $navItems = $header->getNavItems();

@@ -1,5 +1,31 @@
 <?php
 require_once BASE_PATH . '/config.php';
+require_once CONTROLLERS_PATH . '/HeadController.php';
+require_once CONTROLLERS_PATH .'/toggleButtonController.php';
+
+toggleButtonController::handleThemeToggle();
+$styleDynamique = toggleButtonController::getActiveStyle();
+
+// ==========================
+// Variables spécifiques à la page
+// ==========================
+
+
+$pageTitle = "S'inscrire";
+$pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Inscrivez vous sur notre site.";
+$pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté,inscription";
+$pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+$pageCss = ["seConnecter.css",$styleDynamique]; // Fichier CSS spécifique à la page
+
+// ==========================
+// Contrôleur Head
+// ==========================
+$head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+
+require_once LAYOUT_PATH . '/head.php';
+require_once PAGES_PATH . '/sInscrire.php';
+
+
 
 session_start();
 

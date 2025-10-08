@@ -38,9 +38,9 @@ define('IMAGES_URL', ASSETS_URL . '/images');
 
 // ─────────────── URLs publiques ─────────────── : clé, fichier à inclure
 $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
-    'seConnecter' => PAGES_PATH . '/seConnecter.php',
-    'sInscrire' => PAGES_PATH . '/sInscrire.php',
-    'planDuSite' => PAGES_PATH . '/planDuSite.php',
+    'seConnecter' => CONTROLLERS_PATH . '/seConnecterController.php',
+    'sInscrire' => CONTROLLERS_PATH . '/sInscrireController.php',
+    'planDuSite' => CONTROLLERS_PATH . '/planDuSiteController.php',
     'bienvenue' => PAGES_PATH . '/bienvenue.php',
     'logout' => CONTROLLERS_PATH . '/seDeconnecterController.php',
     'signup' => CONTROLLERS_PATH . '/sInscrireController.php',
@@ -48,8 +48,7 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
     'forgot' => PAGES_PATH . '/mdpOublie.php',
     'send_reset' => CONTROLLERS_PATH . '/mdpOublieController.php',
     'password_reset' => PAGES_PATH . '/mdpRenit.php',
-    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php',
-    'planDuSite' => CONTROLLERS_PATH. '/planDuSiteController.php'];
+    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php'];
 
 // Récupérer le paramètre 'page', sinon définir 'home' par défaut
 $page = filter_input(INPUT_GET, 'page') ?? 'home';

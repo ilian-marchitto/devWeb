@@ -5,6 +5,7 @@ require_once BASE_PATH . '/config.php';
 require_once CONTROLLERS_PATH . '/HeadController.php';
 require_once CONTROLLERS_PATH . '/HeaderController.php';
 require_once CONTROLLERS_PATH . '/FooterController.php';
+require_once  CONTROLLERS_PATH .'/toggleButtonController.php';
 require_once MODELS_PATH.'/SongModel.php';
 require_once MODELS_PATH . '/AlbumModel.php';
 require_once MODELS_PATH . '/UserModels.php';
@@ -12,11 +13,19 @@ require_once MODELS_PATH . '/UserModels.php';
 // ==========================
 // Variables spécifiques à la page
 // ==========================
+
+// 1) gérer le toggle AVANT de lire la session
+toggleButtonController::handleThemeToggle();
+
+// 2) lire la valeur active
+$styleDynamique = toggleButtonController::getActiveStyle();
+
+
 $pageTitle = "Bienvenue sur le site Fan2Jul";
 $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Découvrez la communauté, les albums et l'actualité.";
 $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, albums, communauté, actualité";
 $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-$pageCss = ["accueil.css"]; // Fichier CSS spécifique à la page
+$pageCss = ["accueil.css", $styleDynamique]; // Fichier CSS spécifique à la page
 
 // ==========================
 // Contrôleur Head

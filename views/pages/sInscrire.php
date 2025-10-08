@@ -1,11 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Créer un compte</title>
-    <link rel="stylesheet" href="<?= CSS_URL ?>/seConnecter.css">
-</head>
+
 
 <body>
 <div class="login-image-wrapper">
@@ -16,7 +9,7 @@
     <form action="?page=signup" method="post" class="login-form">
         <h2>Créer un compte</h2>
         <?php
-        session_start();
+        
         if (!empty($_SESSION['erreuremail'])) : ?>
             <p class="error"><?= htmlspecialchars($_SESSION['erreuremail']) ?></p>
         <?php
@@ -54,4 +47,3 @@
     </form>
 </div>
 </body>
-</html>

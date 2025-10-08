@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'Plan du site' ?></title>
-    <link rel="stylesheet" href="<?= CSS_URL ?>/planDuSite.css">
-</head>
+
 <body>
 
 <main class="plan-du-site-container">
@@ -27,4 +21,4 @@
 </main>
 
 </body>
-</html>
+
