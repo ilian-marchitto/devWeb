@@ -32,7 +32,7 @@ if (!$email) {
 $message = "Si un compte existe pour cet email, tu recevras un message contenant un lien.";
 
 // Recherche de l'utilisateur
-$userModel = new UserModel($connection);
+$userModel = new UserModels($connection);
 $userData = $userModel->findByEmail($email);
 
 if ($userData) {
