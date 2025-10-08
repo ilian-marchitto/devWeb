@@ -1,7 +1,5 @@
 <?php
 
-require_once BASE_PATH . '/config.php';
-
 // ─────────────── Liens PHP ───────────────
 
 
@@ -33,6 +31,7 @@ define('ASSETS_URL', BASE_URL . '/assets');
 // Sous-dossiers Assets
 define('IMAGES_URL', ASSETS_URL . '/images');
 
+require_once BASE_PATH . '/config.php';
 
 
 // Ensuite, enregistrer l’autoloader
