@@ -8,19 +8,17 @@ body {
 /* ====== TOGGLE THEME BUTTON ====== */
 .toggle-theme-btn {
   display: inline-block;
-  position: fixed;       /* fixé sur l’écran, pas dans le flux */
-  top: 20px;             /* distance du haut */
-  left: 20px;            /* distance du bord gauche */
-  width: 70px;
-  height: 36px;
-  border-radius: 50px;
-  background-color: #5b2c8a;
+  position: absolute;
+  top: 100px;
+  left: 30px;   
+  width: 70px;              /* largeur du switch */
+  height: 36px;             /* hauteur du switch */
+  border-radius: 50px;      /* forme ovale */
+  background-color: #5b2c8a; /* violet du fond (style.css par exemple) */
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  z-index: 1000;         /* s'assure qu’il reste au-dessus du contenu */
 }
-
 
 /* Le "rond" intérieur */
 .toggle-theme-btn .toggle-switch {
