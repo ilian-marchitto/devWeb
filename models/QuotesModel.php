@@ -1,5 +1,5 @@
 <?php
-
+namespace Models;
 require_once BASE_PATH . '/config.php';
 
 class QuoteModel {

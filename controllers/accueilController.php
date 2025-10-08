@@ -7,7 +7,7 @@ require_once CONTROLLERS_PATH . '/HeaderController.php';
 require_once CONTROLLERS_PATH . '/FooterController.php';
 require_once  CONTROLLERS_PATH .'/toggleButtonController.php';
 require_once MODELS_PATH.'/SongModel.php';
-require_once MODELS_PATH . '/AlbumModel.php';
+use Models\AlbumModel;
 require_once MODELS_PATH . '/UserModels.php';
 
 // ==========================
@@ -44,7 +44,7 @@ $navItems    = $header->getNavItems();
 $buttonItems = $header->getButtonItems();
 $fontItems   = $header->getFontItems();
 
-//Recuperation du nombres de compte dans la base
+// Recuperation du nombre de comptes dans la base
 $user = new UserModels($connection);
 $numberUser = $user -> countUserAccount();
 
