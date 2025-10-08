@@ -1,8 +1,7 @@
 body {
-    font-family: "Oswald", sans-serif;
-    background: linear-gradient(135deg, #C82B11, #d34a13, #DD8416);
+
     color: #fff;
-    margin: 0;
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
