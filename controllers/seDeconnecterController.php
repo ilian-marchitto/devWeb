@@ -17,7 +17,7 @@ $pageTitle = "Se deconnecter";
 $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Deconnectez-vous en toutes sécurités.";
 $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, deconnexion";
 $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-$pageCss = ["seDeconnecter.css", $styleDynamique]; // Fichier CSS spécifique à la page
+$pageCss = ["seConnecter.css", $styleDynamique]; // Fichier CSS spécifique à la page
 
 // ==========================
 // Contrôleur Head
@@ -25,7 +25,7 @@ $pageCss = ["seDeconnecter.css", $styleDynamique]; // Fichier CSS spécifique à
 $head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
 
 require_once LAYOUT_PATH . '/head.php';
-require_once PAGES_PATH . '/seDeconnecter.php';
+
 
 $initiale = '';
 
