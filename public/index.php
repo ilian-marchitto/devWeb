@@ -1,5 +1,6 @@
 <?php
 
+
 // ─────────────── Liens PHP ───────────────
 
 
@@ -21,24 +22,18 @@ define('LAYOUT_PATH', VIEWS_PATH . '/layout');
 
 // ─────────────── URLs publiques ───────────────
 
+
 // Lien principal
 define('BASE_URL', 'https://fan2jul.alwaysdata.net/');
+
 
 // Sous-dossiers Public
 define('CSS_URL', BASE_URL . '/css');
 define('ASSETS_URL', BASE_URL . '/assets');
 
+
 // Sous-dossiers Assets
 define('IMAGES_URL', ASSETS_URL . '/images');
-
-require_once BASE_PATH . '/config.php';
-
-
-// Ensuite, enregistrer l’autoloader
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . '/' . str_replace('\\', '/', $class) . '.php';
-    if (file_exists($file)) require $file;
-});
 
 
 // ─────────────── URLs publiques ─────────────── : clé, fichier à inclure
@@ -58,7 +53,10 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
 // Récupérer le paramètre 'page', sinon définir 'home' par défaut
 $page = filter_input(INPUT_GET, 'page') ?? 'home';
 
+
 // Vérifier si la page demandée est dans les routes autorisées
 if (isset($routes[$page])) { include $routes[$page]; }
+
+
 else { // Page non trouvée → afficher une page 404
     echo "<h2>404 - Page non trouvée</h2>"; }

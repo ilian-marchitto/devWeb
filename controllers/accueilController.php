@@ -7,7 +7,7 @@ require_once CONTROLLERS_PATH . '/HeaderController.php';
 require_once CONTROLLERS_PATH . '/FooterController.php';
 require_once  CONTROLLERS_PATH .'/toggleButtonController.php';
 require_once MODELS_PATH.'/SongModel.php';
-use Models\AlbumModel;
+require_once MODELS_PATH . '/AlbumModel.php';
 require_once MODELS_PATH . '/UserModels.php';
 
 // ==========================
