@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$token || !$pwd || $pwd !== $pwd2) {
         $error = "Données invalides ou mots de passe non identiques.";
     } else {
-        $userModel = new UserModel($connection);
+        $userModel = new UserModels($connection);
         $user = $userModel->findByToken($token);
 
         if (!$user) {
