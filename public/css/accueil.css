@@ -193,9 +193,23 @@ h1 {
     display: block;
 }
 
-p {
+#Description p {
+
+    max-width: 700px;
+    color: #000000;
+    margin: 20px ;      /* centré horizontalement et marge verticale de 20px */
+    padding: 10px;          /* espace à l’intérieur de la zone */
     font-size: 20px;
-    text-align: justify;
+    text-align: center;    /* texte justifié */
+    /* optionnel : coins arrondis */
+}
+
+#Description {
+    justify-items: center;
+}
+
+#Albums h1 {
+    background-color: rgba(0, 0, 0, 0.52);
 }
 
 html {
@@ -214,7 +228,7 @@ figcaption {
 }
 
 #Communaute {
-    background-color: rgba(0, 0, 0, 0.67);
+    background-color: rgb(0, 0, 0);
 }
 
 #Communaute p {
@@ -274,6 +288,8 @@ display: none;
     color: #000;
     border-color: #fff;
 }
+
+
 
 
 /* ----- RESPONSIVE DESIGN ----- */

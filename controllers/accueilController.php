@@ -5,9 +5,9 @@ require_once BASE_PATH . '/config.php';
 require_once CONTROLLERS_PATH . '/HeadController.php';
 require_once CONTROLLERS_PATH . '/HeaderController.php';
 require_once CONTROLLERS_PATH . '/FooterController.php';
-
+require_once MODELS_PATH.'/SongModel.php';
 require_once MODELS_PATH . '/AlbumModel.php';
-require_once MODELS_PATH . '/ItemModel.php';
+require_once MODELS_PATH . '/UserModels.php';
 
 // ==========================
 // Variables spécifiques à la page
@@ -36,8 +36,8 @@ $buttonItems = $header->getButtonItems();
 $fontItems   = $header->getFontItems();
 
 //Recuperation du nombres de compte dans la base
-$itemsData = new ItemModel($connection);
-$numberUser = $itemsData -> countUserAccount();
+$user = new UserModels($connection);
+$numberUser = $user -> countUserAccount();
 
 
 $albumModel = new AlbumModel($connection);
@@ -62,6 +62,18 @@ if ($page > $totalPages) $page = $totalPages;
 
 $start = ($page - 1) * $perPage;
 $pageAlbums = array_slice($albums, $start, $perPage);
+
+
+
+
+$songModel = new SongModel($connection); // $pdo vient de ton config.php
+$randomSong = $songModel->getRandomSong();
+
+if ($randomSong) {
+    // Extraire l’ID YouTube
+    parse_str(parse_url($randomSong['url'], PHP_URL_QUERY), $yt_params);
+    $videoId = $yt_params['v'] ?? null;
+}
 
 // ==========================
 // Inclusion des vues

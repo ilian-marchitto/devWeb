@@ -4,6 +4,8 @@ require_once BASE_PATH . '/config.php';
 
 class AlbumModel {
 
+    private $connection;
+
     public function __construct(PDO $connection) {
         $this->connection = $connection;
     }

@@ -7,13 +7,13 @@
 </section>
 <section id="Description">
     <h1> DESCRIPTION </h1>
-    <p> Bienvenue sur **Fan2Jul**, le site entièrement dédié à l’univers de **Jul**, l’artiste marseillais qui a marqué le rap français par son style unique et son énergie incomparable.
-        Ici, tu pourras découvrir ses albums, suivre l’actualité de sa carrière, et rejoindre la communauté des fans qui partagent la même passion pour sa musique.
+    <p> Bienvenue sur <b>Fan2Jul</b>, le site entièrement dédié à l’univers de <b>Jul</b>, l’artiste marseillais qui a marqué le rap français par son style unique et son énergie incomparable.
+        Ici, tu pourras découvrir ses albums, suivre l’actualité de sa carrière, et rejoindre la communauté des fans qui partagent la même passion pour sa musique. <br><br>
 
-        Ce site a été réalisé dans le cadre d’un **projet étudiant à l’IUT d’Informatique d’Aix-en-Provence**.
+        Ce site a été réalisé dans le cadre d’un <b>projet étudiant à l’IUT d’Informatique d’Aix-en-Provence</b><br><br>
         Notre objectif : créer une plateforme moderne, interactive et fidèle à l’esprit de Jul, tout en mettant en pratique nos compétences en développement web — du design de l’interface à la gestion de base de données.
-
-        **Fan2Jul**, c’est avant tout un projet de passion et de technique : une vitrine de notre travail d’étudiants, mais aussi un espace convivial pour tous les fans du J.
+            <br><br>
+        <b>Fan2Jul</b>, c’est avant tout un projet de passion et de technique : une vitrine de notre travail d’étudiants, mais aussi un espace convivial pour tous les fans du J.
     </p>
 </section>
 <section id="Albums">
@@ -41,6 +41,24 @@
 </section>
 <section id="Actualite">
     <h1> ACTU </h1>
+    <?php if (!empty($randomSong)): ?>
+        <div class="youtube-video">
+            <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/<?= htmlspecialchars($videoId) ?>"
+                    title="<?php echo $randomSong ?>"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <p style="text-align:center; color:white; font-size:20px;">
+            <?= htmlspecialchars($randomSong['title']) ?>
+        </p>
+    <?php else: ?>
+        <p>Aucune chanson trouvée.</p>
+    <?php endif; ?>
+
+
+
 </section>
 
 

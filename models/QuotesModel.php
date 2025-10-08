@@ -3,6 +3,7 @@
 require_once BASE_PATH . '/config.php';
 
 class QuoteModel {
+    private $connection;
     public function __construct(PDO $connection) {
         $this->connection = $connection;
     }
