@@ -12,7 +12,7 @@ class BienvenueController
     private PDO $connection;
     private string $styleDynamique;
 
-    public function __construct($connection)
+    public function __construct(PDO $connection)
     {
         $this->connection = $connection;
 
