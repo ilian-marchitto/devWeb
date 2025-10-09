@@ -24,7 +24,6 @@ class MdpOublieController
     private array $cssFiles = [];
     public $message;
     public $head;
-    public $styleDynamique;
     
 
     public function __construct(PDO $connection)
@@ -38,7 +37,7 @@ class MdpOublieController
 
         // ─────────────── Gestion du thème ───────────────
         ToggleButtonController::handleThemeToggle();
-        $this->styleDynamique = ToggleButtonController::getActiveStyle();
+        $styleDynamique = ToggleButtonController::getActiveStyle();
 
         $pageTitle = "mot de passe oublié";
         $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Retrouvez votre mot de passe grâce à cette page.";
