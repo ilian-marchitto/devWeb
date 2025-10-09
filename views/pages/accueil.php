@@ -1,6 +1,6 @@
 <!-- Contenu de la page -->
 <section id="Communaute">
-  <h1> COMMU </h1>
+  <h1> COMMUNAUTE </h1>
   <p class="effectifTeamJul"> Effectif de la team Jul : </p>
   <p> Créer un compte pour faire augmenter le compteur !</p>
   <p class="compteur"> <?php echo $numberUser ?> </p>
@@ -40,7 +40,7 @@
   </div>
 </section>
 <section id="Actualite">
-  <h1> ACTU </h1>
+  <h1> ACTUALITES </h1>
   <?php if (!empty($randomSong)): ?>
     <div class="youtube-video">
       <iframe width="560" height="315"

@@ -10,6 +10,7 @@ class SeDeconnecterController
     public $pageKeywords;
     public $pageCss;
     public $pageAuthor;
+    public $initiale;
 
     public function __construct()
     {
@@ -33,11 +34,10 @@ class SeDeconnecterController
 
         $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
 
-        $initiale = '';
 
         if (isset($_SESSION['firstname']) && !empty($_SESSION['firstname'])) {
             $prenom = $_SESSION['firstname'];
-            $initiale = strtoupper(substr($prenom, 0, 1));
+            $this->initiale = strtoupper(substr($prenom, 0, 1));
         }
 
         $_SESSION = [];
@@ -47,6 +47,9 @@ class SeDeconnecterController
 
     public function render(): void
     {
+        $vars = get_object_vars($this);
+        extract($vars);
+
         require_once LAYOUT_PATH . '/head.php';
         include PAGES_PATH . '/seDeconnecter.php';
     }

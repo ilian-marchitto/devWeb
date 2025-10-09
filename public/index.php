@@ -21,7 +21,7 @@ define('LAYOUT_PATH', VIEWS_PATH . '/layout');
 // ─────────────── URLs publiques ───────────────
 
 // Lien principal
-define('BASE_URL', 'http://localhost/devWeb/public');
+define('BASE_URL', 'https://fan2jul.alwaysdata.net');
 
 
 // Sous-dossiers Public
@@ -44,7 +44,8 @@ use controllers\SeDeconnecterController;
 use controllers\PlanDuSiteController;
 use controllers\FooterController;
 use controllers\Builder;
-use controllers\MDPOublieController;
+use controllers\MdpOublieController;
+use controllers\MdpRenitController;
 
 switch ($page) {
 
@@ -87,6 +88,11 @@ switch ($page) {
         $controller = new MdpOublieController($connection);
         $controller->render();
         break;
+
+    case 'password_reset':
+        $controller = new MdpRenitController($connection);
+        $controller->render();
+        break;
     
     default:
         echo "<h2>Page non trouvée</h2>";
@@ -103,8 +109,7 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/AccueilController.php',
     'signup' => CONTROLLERS_PATH . '/SInscrireController.php',
     'login' => CONTROLLERS_PATH . '/SeConnecterController.php',
     'forgot' => CONTROLLERS_PATH . '/MdpOublieController.php',
-    'password_reset' => PAGES_PATH . '/MdpRenit.php',
-    'perform_reset' => CONTROLLERS_PATH . '/MdpRenitController.php',
+    'password_reset' => CONTROLLERS_PATH . '/MdpRenitController.php',
     'second_authenticator' => CONTROLLERS_PATH . '/DoubleAuthentificationController.php',];
 
 

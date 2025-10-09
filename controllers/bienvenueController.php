@@ -1,21 +1,22 @@
 <?php
 
 namespace controllers;
+use Models\UserModels;
 
 class BienvenueController
 {
-    private PDO $connection;
+
     private string $prenom;
     private string $initiale;
     private HeadController $head;
 
-    public function __construct(PDO $connection)
+    public function __construct($connection)
     {
         $this->connection = $connection;
 
         // ─────────────── Gestion du thème ───────────────
         toggleButtonController::handleThemeToggle();
-        $styleDynamique = toggleButtonController::getActiveStyle();
+        $this->styleDynamique = toggleButtonController::getActiveStyle();
 
         // ─────────────── Protection de la page ───────────────
         if (!isset($_SESSION['firstname'])) {
@@ -41,6 +42,9 @@ class BienvenueController
     // ─────────────── Méthode d’affichage ───────────────
     public function render(): void
     {
+        $vars = get_object_vars($this);
+        extract($vars);
+
         require_once LAYOUT_PATH . '/head.php';
         include PAGES_PATH . '/bienvenue.php';
     }

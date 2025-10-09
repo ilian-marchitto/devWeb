@@ -14,7 +14,7 @@
     <h2>Réinitialiser le mot de passe</h2>
 
     <?php if(empty($success) && ($token)): ?>
-        <form method="post" action='<?= BASE_URL ?>/index.php?page=perform_reset' >
+        <form method="post" action='<?= BASE_URL ?>/index.php?page=password_reset' >
             <input type="hidden" name="token" value="<?= $token ?>">
             <label>Nouveau mot de passe</label>
             <input type="password" name="password" required>
@@ -27,7 +27,7 @@
     <?php if(!empty($success)): ?>
         <p class="success"><?= htmlspecialchars($success) ?></p>
         <p class="forgot">
-        <a href="<?= BASE_URL ?>/index.php?page=seConnecter">Retour à la connexion</a>
+        <a href="<?= BASE_URL ?>/index.php?page=se_connecter">Retour à la connexion</a>
         <a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a>
         </p>
     <?php endif; ?>
@@ -35,6 +35,6 @@
     <?php if(!empty($error)): ?>
         <p class="error"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
-        </div
+    </div>
 </div>
 </body>

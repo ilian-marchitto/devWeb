@@ -38,12 +38,12 @@ class SInscrireController
         // ==========================
         // Variables spécifiques à la page
         // ==========================
-        $pageTitle = "S'inscrire";
-        $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Inscrivez-vous sur notre site.";
-        $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, inscription";
-        $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-        $pageCss = ["seConnecter.css", $this->styleDynamique];
-        $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+        $this->pageTitle = "S'inscrire";
+        $this->pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Inscrivez-vous sur notre site.";
+        $this->pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, inscription";
+        $this->pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+        $this->pageCss = ["seConnecter.css", $this->styleDynamique];
+        $this->head = new HeadController($this->pageTitle, $this->pageDescription, $this->pageKeywords, $this->pageAuthor, $this->pageCss);
 
         // Gestion du formulaire
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -58,7 +58,7 @@ class SInscrireController
 
         require_once LAYOUT_PATH . '/head.php';
         require_once PAGES_PATH . '/sInscrire.php';
-        
+
     }
 
     private function handleForm(): void
@@ -83,7 +83,7 @@ class SInscrireController
         }
 
         // Création du code d’authentification
-        $code = random_int(100000, 999999);
+        $code = (string) random_int(100000, 999999);
         $_SESSION['2fa_code'] = $code;
         $_SESSION['2fa_expires'] = time() + 600;
         $_SESSION['Register'] = true;

@@ -40,19 +40,19 @@ class SeConnecterController
         // ==========================
         // Variables spécifiques à la page
         // ==========================
-        $pageTitle = "Se connecter";
-        $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Connectez-vous pour découvrir la communauté, les albums et l'actualité.";
-        $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, connexion";
-        $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-        $pageCss = ["seConnecter.css", $styleDynamique];
-        $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+        $this->pageTitle = "Se connecter";
+        $this->pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Connectez-vous pour découvrir la communauté, les albums et l'actualité.";
+        $this->pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, connexion";
+        $this->pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+        $this->pageCss = ["seConnecter.css", $styleDynamique];
+        $this->head = new HeadController($this->pageTitle, $this->pageDescription, $this->pageKeywords, $this->pageAuthor, $this->pageCss);
 
         // Si le formulaire est soumis
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->processLogin();
         }
     }
-        
+
 
     private function processLogin(): void
     {
@@ -73,11 +73,11 @@ class SeConnecterController
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($mot_de_passe, $user['password'])) {
-                $code = random_int(100000, 999999);
+                $code = (string) random_int(100000, 999999);
                 $_SESSION['2fa_code'] = $code;
                 $_SESSION['2fa_user'] = $user;
                 $_SESSION['2fa_expires'] = time() + 600;
-            
+
                 //PHPMailer
                 $mail = new PHPMailer(true);
                 try {
@@ -104,15 +104,6 @@ class SeConnecterController
                 } catch (Exception $e) {
                     $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
                 }
-        
-
-                session_regenerate_id(true);
-                $_SESSION["user_id"]   = $user["idu"];
-                $_SESSION["email"]     = $user["email"];
-                $_SESSION["firstname"] = $user["firstname"];
-
-                header("Location: " . BASE_URL . "/index.php?page=bienvenue");
-                exit;
             }
             else {
                 $_SESSION['erreur'] = "Identifiant ou mot de passe incorrect.";
@@ -122,7 +113,7 @@ class SeConnecterController
             $_SESSION['erreur'] = "Erreur lors de la connexion : " . $e->getMessage();
             $this->redirectToLogin();
         }
-        
+
     }
 
     private function redirectToLogin(): void

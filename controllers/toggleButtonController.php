@@ -30,7 +30,7 @@ class ToggleButtonController
             ]);
 
             // Recharge la page sans le paramètre toggle_style (optionnel mais propre)
-            $homeUrl = 'http://localhost/devWeb/public?page=home';
+            $homeUrl = 'https://fan2jul.alwaysdata.net/index.php?page=home';
             header("Location: $homeUrl");
             exit;
         

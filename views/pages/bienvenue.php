@@ -6,8 +6,7 @@
 
 <body>
     <div class="welcome-message">
-        <h1>Bienvenue <?= htmlspecialchars($controller->getPrenom()) ?> !</h1>
-        <p>Initiale : <?= htmlspecialchars($controller->getInitiale()) ?></p>
+        <h1>BIENVENUE LE <?= htmlspecialchars($initiale) ?> !</h1>
     </div>
 
     <div class="login-image-wrapper">

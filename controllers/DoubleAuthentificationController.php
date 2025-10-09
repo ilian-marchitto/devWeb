@@ -25,12 +25,12 @@ class DoubleAuthentificationController
         // ==========================
         // Métadonnées de la page
         // ==========================
-        $pageTitle = "Double authentification";
-        $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Nous utilisons une méthode de double authentification pour une meilleure sécurité.";
-        $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, double authentification";
-        $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-        $pageCss = ["seConnecter.css", $this->styleDynamique];
-        $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+        $this->pageTitle = "Double authentification";
+        $this->pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Nous utilisons une méthode de double authentification pour une meilleure sécurité.";
+        $this->pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, double authentification";
+        $this->pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+        $this->pageCss = ["seConnecter.css", $this->styleDynamique];
+        $this->head = new HeadController($this->pageTitle, $this->pageDescription, $this->pageKeywords, $this->pageAuthor, $this->pageCss);
 
         // ==========================
         // Vérifications d’accès
@@ -45,73 +45,67 @@ class DoubleAuthentificationController
             exit;
         }
 
-        $success = "Le code de vérification a bien été envoyé.";
+        $this->success = "Le code de vérification a bien été envoyé.";
         $userMaker = new UserModels($this->connection);
-        $erreur = null;
+        $this->erreur = null;
 
         // ==========================
         // Traitement du formulaire
         // ==========================
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $code_saisi = trim($_POST["code"]);
+            $code_saisi = $_POST["code"];
 
             if (time() > $_SESSION['2fa_expires']) {
                 unset($_SESSION['2fa_code']);
-                $erreur = "Code expiré";
-            } elseif (!isset($_SESSION['Register'])) {
-                $erreur = $this->handleLoginVerification($code_saisi);
+                $this->erreur = "Code expiré";
+            } elseif ($code_saisi === $_SESSION['2fa_code'] && !isset($_SESSION['Register'])) {
+                $this->handleLoginVerification();
+            } elseif ($code_saisi === $_SESSION['2fa_code'] && isset($_SESSION['Register'])) {
+                $this->handleRegisterVerification($userMaker);
             } else {
-                $erreur = $this->handleRegisterVerification($code_saisi, $userMaker);
+                $this->erreur = "Code incorrect";
             }
         }
     }
 
-    private function handleLoginVerification(string $code_saisi): ?string
+    private function handleLoginVerification(): void
     {
-        if ($code_saisi === $_SESSION['2fa_code']) {
-            $user = $_SESSION['2fa_user'];
-            session_regenerate_id(true);
-            $_SESSION["user_id"]   = $user["idu"];
-            $_SESSION["email"]     = $user["email"];
-            $_SESSION["firstname"] = $user["firstname"];
+        $user = $_SESSION['2fa_user'];
+        session_regenerate_id(true);
+        $_SESSION["user_id"]   = $user["idu"];
+        $_SESSION["email"]     = $user["email"];
+        $_SESSION["firstname"] = $user["firstname"];
 
-            unset($_SESSION['2fa_code'], $_SESSION['2fa_user']);
+        unset($_SESSION['2fa_code'], $_SESSION['2fa_user']);
 
-            header("Location:" . BASE_URL . "index.php?page=bienvenue");
+        header("Location:" . BASE_URL . "/index.php?page=bienvenue");
+        exit;
+    }
+
+    private function handleRegisterVerification(UserModels $userMaker): void
+    {
+        $firstname = $_SESSION["firstname"];
+        $lastname  = $_SESSION["lastname"];
+        $email     = $_SESSION["email"];
+        $password  = $_SESSION["password"];
+        $song_id   = $_SESSION["song_id"];
+
+        session_unset();
+        $_SESSION = [];
+        session_regenerate_id(true);
+
+        try {
+            $userMaker->createUser($firstname, $lastname, $email, $password, $song_id);
+
+            $_SESSION["firstname"] = $firstname;
+            $_SESSION["email"] = $email;
+            header("Location:" . BASE_URL . "/index.php?page=bienvenue");
+            exit;
+        } catch (PDOException $e) {
+            echo "Erreur d'insertion : " . $e->getMessage();
+            header("Location:" . BASE_URL . "/index.php?page=s_inscrire");
             exit;
         }
-
-        return "Code incorrect.";
-    }
-
-    private function handleRegisterVerification(string $code_saisi, UserModels $userMaker): ?string
-    {
-        if ($code_saisi === $_SESSION['2fa_code']) {
-            $firstname = $_SESSION["firstname"];
-            $lastname  = $_SESSION["lastname"];
-            $email     = $_SESSION["email"];
-            $password  = $_SESSION["password"];
-            $song_id   = $_SESSION["song_id"];
-
-            session_unset();
-            $_SESSION = [];
-            session_regenerate_id(true);
-
-            try {
-                $userMaker->createUser($firstname, $lastname, $email, $password, $song_id);
-
-                $_SESSION["firstname"] = $firstname;
-                $_SESSION["email"] = $email;
-                header("Location:" . BASE_URL . "/index.php?page=bienvenue");
-                exit;
-            } catch (PDOException $e) {
-                echo "Erreur d'insertion : " . $e->getMessage();
-                header("Location:" . BASE_URL . "/index.php?page=s_inscrire");
-                exit;
-            }
-        }
-
-        return "Code incorrect ou expiré.";
     }
 
     public function render(): void

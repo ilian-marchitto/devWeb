@@ -21,6 +21,7 @@ class MdpOublieController
     private string $keywords;
     private string $author;
     private array $cssFiles = [];
+    public $message;
     
 
     public function __construct($connection)
@@ -46,25 +47,13 @@ class MdpOublieController
         $this->handleRequest();
     }
 
-    public function render(): void
-    {
-
-        $vars = get_object_vars($this);
-        extract($vars);
-
-        require_once LAYOUT_PATH . '/head.php';
-        include PAGES_PATH . '/mdpOublie.php';
-       
-    }
+    
 
     public function handleRequest()
     {
         $error = '';
-        $success = '';
-        $message = '';
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            include PAGES_PATH . '/mdpOublie.php';
         
             $email = trim($_POST['email'] ?? '');
             if (empty($email)) {
@@ -73,36 +62,35 @@ class MdpOublieController
 
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 $error = "Aucune donnée reçue.";
-            }
 
-            
-            
-            // Message générique (toujours affiché)
-            $message = "Si un compte existe pour cet email, tu recevras un message contenant un lien.";
+            }else {   
+                // Message générique (toujours affiché)
+                $this->message = "Si un compte existe pour cet email, tu recevras un message contenant un lien.";
 
-            $userModel = new UserModels($this->connection);
-            $userData = $userModel->findByEmail($email);
-
-            
-
-            if ($userData) {
-                // Générer token et enregistrer
-                $token = bin2hex(random_bytes(16));
-                $expires = (new \DateTime('+1 hour'))->format('Y-m-d H:i:s');
-                $userModel->saveResetToken($email, $token, $expires);
-
-                // Lien de réinitialisation
-                $link = BASE_URL . "/index.php?page=password_reset&token=" . urlencode($token);
-
-                // Envoi du mail
-                $this->sendResetMail($email, $link, $success, $error);
-
+                $userModel = new UserModels($this->connection);
+                $userData = $userModel->findByEmail($email);
                 
+                
+
+                if ($userData) {
+                    // Générer token et enregistrer
+                    $token = bin2hex(random_bytes(16));
+                    $expires = (new \DateTime('+1 hour'))->format('Y-m-d H:i:s');
+                    $userModel->saveResetToken($email, $token, $expires);
+
+                    // Lien de réinitialisation
+                    $link = BASE_URL . "/index.php?page=password_reset&token=" . urlencode($token);
+
+                    // Envoi du mail
+                    $this->sendResetMail($email, $link, $error);
+
+                    
+                }
             }
         }
     }
 
-    private function sendResetMail(string $email, string $link, &$success, &$error): void
+    private function sendResetMail(string $email, string $link, &$error): void
     {
         //PHPMailer
         $mail = new PHPMailer(true);
@@ -128,10 +116,19 @@ class MdpOublieController
                 Si tu n'as pas demandé cette opération, ignore ce message.
             ";
             $mail->send();
-            $success = "L'e-mail de réinitialisation a bien été envoyé à $email.";
-            exit;
+            
         } catch (Exception $e) {
             $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
         }
+    }
+
+    public function render(): void
+    {
+
+        $vars = get_object_vars($this);
+        extract($vars);
+
+        require_once LAYOUT_PATH . '/head.php';
+        include PAGES_PATH . '/mdpOublie.php';
     }
 }

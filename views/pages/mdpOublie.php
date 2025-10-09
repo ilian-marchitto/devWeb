@@ -27,13 +27,6 @@
             <a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a>
         </p>
     </div>
-    <?php if(!empty($error)): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
-    <?php endif; ?>
-
-    <?php if(!empty($success)): ?>
-        <p class="success"><?= htmlspecialchars($success) ?></p>
-    <?php endif; ?>
 
     <?php if(!empty($message)): ?>
         <p class="info"><?= htmlspecialchars($message) ?></p>
