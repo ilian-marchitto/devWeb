@@ -2,9 +2,9 @@
 
 namespace controllers;
 
-use Models\UserModels;
-use Models\SongModel;
-use Models\AlbumModel;
+use models\UserModels;
+use models\SongModel;
+use models\AlbumModel;
 
 class AccueilController {
     private $connection;
