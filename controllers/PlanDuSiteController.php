@@ -35,7 +35,7 @@ class PlanDuSiteController
     }
 
     public function buildPages(): void
-    {
+{
     $dirDisk = $this->viewsPath;
     $this->pages = [];
 
@@ -50,8 +50,10 @@ class PlanDuSiteController
         'password_reset', 
         'mdpRenit', 
         'mdpOublie', 
-        'DoubleAuthentification',  
-        'SeDeconnecter',
+        'doubleAuthentification',  // minuscule
+        'DoubleAuthentification',  // majuscule
+        'seDeconnecter',           // minuscule
+        'SeDeconnecter',           // majuscule
     ];
 
     // Mapping : slug fichier => [nom d'affichage, slug URL]
@@ -69,8 +71,8 @@ class PlanDuSiteController
 
         $slug = pathinfo($file, PATHINFO_FILENAME);
 
-        // Ignorer les pages de la liste noire
-        if (in_array($slug, $ignoredPages, true)) {
+        // Ignorer les pages de la liste noire (insensible à la casse)
+        if (in_array(strtolower($slug), array_map('strtolower', $ignoredPages), true)) {
             continue;
         }
 
@@ -79,7 +81,6 @@ class PlanDuSiteController
             [$displayName, $linkSlug] = $pageMapping[$slug];
         } else {
             // Fallback : transformer le slug en nom lisible
-            // exemple: "ma_page_test" => "Ma page test"
             $displayName = ucfirst(str_replace('_', ' ', $slug));
             $linkSlug = $slug;
         }
