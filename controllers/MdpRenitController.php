@@ -1,9 +1,10 @@
 <?php
 
 namespace controllers;
-require BASE_PATH . '/vendor/PHPMailer/src/PHPMailer.php';
-require BASE_PATH . '/vendor/PHPMailer/src/Exception.php';
-require BASE_PATH . '/vendor/PHPMailer/src/SMTP.php';
+require PHPMAILER_PATH . '/PHPMailer.php';
+require PHPMAILER_PATH . '/Exception.php';
+require PHPMAILER_PATH . '/SMTP.php';
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
