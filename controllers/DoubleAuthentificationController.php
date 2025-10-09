@@ -16,6 +16,7 @@ class DoubleAuthentificationController
     public $success;
     public $erreur;
     private PDO $connection;
+    private string $styleDynamique;
 
     public function __construct(PDO $connection)
     {
