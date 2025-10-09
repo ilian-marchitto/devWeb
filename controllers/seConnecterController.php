@@ -2,9 +2,14 @@
 namespace controllers;
 use PDO;
 use PDOException;
+require BASE_PATH . '/vendor/PHPMailer/src/PHPMailer.php';
+require BASE_PATH . '/vendor/PHPMailer/src/Exception.php';
+require BASE_PATH . '/vendor/PHPMailer/src/SMTP.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once BASE_PATH . '/config.php';
+use PHPMailer\PHPMailer\SMTP;
+
 
 class SeConnecterController
 {

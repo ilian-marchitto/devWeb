@@ -4,45 +4,61 @@ namespace controllers;
 
 class BienvenueController
 {
-    public $head;
-    public $pageTitle;
-    public $pageDescription;
-    public $pageKeywords;
-    public $pageCss;
-    public $pageAuthor;
+    private PDO $connection;
+    private string $prenom;
+    private string $initiale;
+    private string $styleDynamique;
+    private HeadController $head;
 
-    public function __construct()
+    public function __construct(PDO $connection)
     {
-        // Gestion du thème
-        ToggleButtonController::handleThemeToggle();
-        $styleDynamique = ToggleButtonController::getActiveStyle();
+        $this->connection = $connection;
 
-        // ==========================
-        // Variables spécifiques à la page
-        // ==========================
+        // ─────────────── Gestion du thème ───────────────
+        toggleButtonController::handleThemeToggle();
+        $this->styleDynamique = toggleButtonController::getActiveStyle();
+
+        // ─────────────── Protection de la page ───────────────
+        if (!isset($_SESSION['firstname'])) {
+            header("Location: " . BASE_URL . "/index.php?page=seConnecter");
+            exit;
+        }
+
+        // ─────────────── Données utilisateur ───────────────
+        $this->prenom = $_SESSION['firstname'];
+        $this->initiale = strtoupper(substr($this->prenom, 0, 1));
+
+        // ─────────────── Configuration de la page ───────────────
         $pageTitle = "Bienvenue sur le site Fan2Jul";
         $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Nous vous souhaitons bienvenue.";
         $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, bienvenue";
         $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
-        $pageCss = ["bienvenue.css", $styleDynamique];
+        $pageCss = ["bienvenue.css", $this->styleDynamique];
+
+        // ─────────────── Initialisation du head ───────────────
         $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
-
-        // ==========================
-        // Sécurité : redirection si non connecté
-        // ==========================
-        if (!isset($_SESSION['firstname'])) {
-            header("Location: " . BASE_URL . "/index.php?page=se_connecter");
-            exit;
-        }
-
-        // Données pour la vue
-        $prenom = $_SESSION['firstname'];
-        $initiale = strtoupper(substr($prenom, 0, 1));
-
     }
 
-    public static function render(){
+    // ─────────────── Méthode d’affichage ───────────────
+    public function render(): void
+    {
         require_once LAYOUT_PATH . '/head.php';
         require_once PAGES_PATH . '/bienvenue.php';
+    }
+
+    // ─────────────── Getters utiles pour la vue ───────────────
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+
+    public function getInitiale(): string
+    {
+        return $this->initiale;
+    }
+
+    public function getHead(): HeadController
+    {
+        return $this->head;
     }
 }

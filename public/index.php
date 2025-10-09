@@ -38,6 +38,7 @@ $page = filter_input(INPUT_GET, 'page') ?? 'home';
 use controllers\AccueilController;
 use controllers\BienvenueController;
 use controllers\SeConnecterController;
+use controllers\DoubleAuthentificationController;
 
 switch ($page) {
 
@@ -55,6 +56,13 @@ switch ($page) {
         $controller = new BienvenueController($connection);
         $controller->render();
         break;
+
+    case 'secondAuthenticator':
+        $controller = new DoubleAuthentificationController($connection);
+        $controller->render();
+        break;
+    
+
     default:
         echo "<h2>Page non trouvée</h2>";
         break;
@@ -72,7 +80,8 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/AccueilController.php',
     'forgot' => PAGES_PATH . '/MdpOublie.php',
     'send_reset' => CONTROLLERS_PATH . '/MdpOublieController.php',
     'password_reset' => PAGES_PATH . '/MdpRenit.php',
-    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php',];
+    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php',
+    'secondAuthenticator' => CONTROLLERS_PATH . '/DoubleAuthentificationController.php',];
 
 
 

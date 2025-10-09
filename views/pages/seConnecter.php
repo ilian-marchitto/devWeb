@@ -1,5 +1,3 @@
-
-
 <body>
     <div class=" login-image-wrapper">
         <img src="<?= IMAGES_URL ?>/Jul2tp.webp" alt="Image de connexion" class="login-image">
@@ -7,7 +5,7 @@
 
     <div class="login-container">
         <div class="login-form">
-            <form action="?page=login" method="post" class="login-form">
+            <form action="?page=se_connecter" method="post" class="login-form">
                 <h2>Connexion</h2>
                 <?php
                 
@@ -26,9 +24,9 @@
                 <button type="submit">Se connecter</button>
                 <p class="forgot">
                     <a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a>
-                    <a href=<?= BASE_URL ?>/index.php?page=forgot>Mot de passe oublié ?</a>
+                    <a href="<?= BASE_URL ?>/index.php?page=forgot">Mot de passe oublié ?</a>
                 </p>
-                <p>Pas encore de compte ? <a href="<?= BASE_URL ?>/index.php?page=sInscrire">Crée le maintenant</a></p>
+                <p>Pas encore de compte ? <a href="<?= BASE_URL ?>/index.php?page=s_inscrire">Crée le maintenant</a></p>
             </form>
         </div>
     </div>

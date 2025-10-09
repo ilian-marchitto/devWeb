@@ -1,5 +1,3 @@
-
-
 <body>
 <div class="login-image-wrapper">
     <img src="<?= IMAGES_URL ?>/Jul2tp.webp" alt="Image de connexion" class="login-image">
