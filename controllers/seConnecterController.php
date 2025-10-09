@@ -54,7 +54,7 @@ class SeConnecterController
             $this->redirectToLogin();
         }
 
-        try {
+        /*try {
             $sql = "SELECT idu, email, firstname, password FROM users WHERE email = :email LIMIT 1";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([':email' => $identifiant]);
@@ -92,7 +92,7 @@ class SeConnecterController
                 } catch (Exception $e) {
                     $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
                 }
-
+        
 
                 session_regenerate_id(true);
                 $_SESSION["user_id"]   = $user["idu"];
@@ -109,6 +109,7 @@ class SeConnecterController
             $_SESSION['erreur'] = "Erreur lors de la connexion : " . $e->getMessage();
             $this->redirectToLogin();
         }
+        */
     }
 
     private function redirectToLogin(): void

@@ -27,7 +27,7 @@ class BienvenueController
         // ==========================
         // Contrôleur Head
         // ==========================
-        $head = new \HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+        $head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
 
         // ==========================
         // Sécurité : redirection si non connecté

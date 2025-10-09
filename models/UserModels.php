@@ -2,6 +2,7 @@
 
 namespace models;
 use PDO;
+use DateTime;
 
 class UserModels {
 
@@ -107,9 +108,11 @@ class UserModels {
         return $user ?: null;
     }
 
+    
     public function isTokenExpired(array $user): bool {
         return new DateTime() > new DateTime($user['reset_expires']);
     }
+    
 
     public function updatePassword(string $email, string $password): void {
         $hash = password_hash($password, PASSWORD_DEFAULT);
