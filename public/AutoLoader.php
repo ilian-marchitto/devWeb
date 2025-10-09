@@ -4,16 +4,13 @@ class Autoloader
     public static function register()
     {
         spl_autoload_register(function ($class) {
-            // Remplacer les backslashes des namespaces par des séparateurs de dossier
-            $classPath = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-
-            // Dossiers racine à explorer
+            // Dossiers où chercher
             $paths = [BASE_PATH];
 
             foreach ($paths as $path) {
-                $file = $path . DIRECTORY_SEPARATOR . $classPath;
+                $file = $path . DIRECTORY_SEPARATOR . $class . '.php';
                 if (file_exists($file)) {
-                    require_once $file;
+                    require $file;
                     return true;
                 }
             }
