@@ -47,7 +47,7 @@ class PlanDuSiteController
             $slug = pathinfo($file, PATHINFO_FILENAME);
 
             // Ignorer certaines pages
-            if (in_array($slug, ['bienvenue', 'forgot', 'password_reset', 'logout', 'mdpRenit', 'mdpOublie', 'second_authenticator', ], true)) {
+            if (in_array($slug, ['bienvenue', 'forgot', 'password_reset', 'logout', 'second_authenticator', ], true)) {
                 continue;
             }
 
