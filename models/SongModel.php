@@ -1,7 +1,8 @@
 <?php
 
 require_once BASE_PATH . '/config.php';
-
+namespace App\Models;
+use PDO;
 class SongModel {
     private $connection;
     public function __construct(PDO $connection) {

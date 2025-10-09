@@ -1,7 +1,8 @@
 <?php
 
 require_once BASE_PATH . '/config.php';
-
+namespace App\Models;
+use PDO;
 class AlbumModel {
 
     private $connection;

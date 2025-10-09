@@ -35,6 +35,27 @@ define('ASSETS_URL', BASE_URL . '/assets');
 // Sous-dossiers Assets
 define('IMAGES_URL', ASSETS_URL . '/images');
 
+// ─────────────── Autoloader  ───────────────
+spl_autoload_register(function ($className) {
+    // Remplacer le namespace App par le chemin réel
+    $className = str_replace('App\\', '', $className);
+
+    // Chemins à tester
+    $paths = [
+        __DIR__ . '/controllers/' . $className . '.php',
+        __DIR__ . '/models/' . $className . '.php',
+    ];
+
+    foreach ($paths as $file) {
+        if (file_exists($file)) {
+            require_once $file;
+            return;
+        }
+    }
+
+    // Si aucune classe trouvée
+    throw new Exception("Classe $className introuvable !");
+});
 
 // ─────────────── URLs publiques ─────────────── : clé, fichier à inclure
 $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
@@ -54,9 +75,25 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/accueilController.php',
 $page = filter_input(INPUT_GET, 'page') ?? 'home';
 
 
-// Vérifier si la page demandée est dans les routes autorisées
-if (isset($routes[$page])) { include $routes[$page]; }
+switch ($page) {
+    case 'home':
+        // Instanciation du controller pour la page d'accueil
+        $controller = new AccueilController($connection);
+        $controller->render(); // Appelle toutes les vues head, header, page, footer
+        break;
 
+    case 'seConnecter':
+        $controller = new SeConnecterController($connection);
+        $controller->render();
+        break;
 
-else { // Page non trouvée → afficher une page 404
-    echo "<h2>404 - Page non trouvée</h2>"; }
+    case 'sInscrire':
+        $controller = new SInscrireController($connection);
+        $controller->render();
+        break;
+
+    case 'bienvenue':
+    $controller = new BienvenueController($connection);
+    $controller->render();
+    break;
+    }
