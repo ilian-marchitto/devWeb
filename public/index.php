@@ -16,7 +16,7 @@ define ('PHPMAILER_PATH', BASE_PATH . '/vendor/phpmailer/phpmailer/src');
 // Sous-dossiers Views
 define('PAGES_PATH', VIEWS_PATH . '/pages');
 define('LAYOUT_PATH', VIEWS_PATH . '/layout');
-require_once PUBLIC_PATH . '/AutoLoader.php';
+
 
 // ─────────────── URLs publiques ───────────────
 
@@ -32,8 +32,9 @@ define('ASSETS_URL', BASE_URL . '/assets');
 // Sous-dossiers Assets
 define('IMAGES_URL', ASSETS_URL . '/images');
 
-// Récupérer le paramètre 'page', sinon définir 'home' par défaut
-$page = filter_input(INPUT_GET, 'page') ?? 'home';
+
+
+require_once PUBLIC_PATH . '/AutoLoader.php';
 
 use controllers\AccueilController;
 use controllers\BienvenueController;
@@ -47,6 +48,8 @@ use controllers\Builder;
 use controllers\MdpOublieController;
 use controllers\MdpRenitController;
 
+// Récupérer le paramètre 'page', sinon définir 'home' par défaut
+$page = filter_input(INPUT_GET, 'page') ?? 'home';
 switch ($page) {
 
     case 'home':
