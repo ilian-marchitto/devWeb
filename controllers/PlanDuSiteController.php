@@ -36,35 +36,63 @@ class PlanDuSiteController
 
     public function buildPages(): void
     {
-        $dirDisk = $this->viewsPath;
-        $this->pages = [];
+    $dirDisk = $this->viewsPath;
+    $this->pages = [];
 
-        if (!is_dir($dirDisk)) return;
+    if (!is_dir($dirDisk)) return;
 
-        foreach (scandir($dirDisk) as $file) {
-            if ($file[0] === '.') continue;
+    // ─────────────── Configuration centralisée ───────────────
+    
+    // Pages à ignorer complètement
+    $ignoredPages = [
+        'bienvenue', 
+        'forgot', 
+        'password_reset', 
+        'logout', 
+        'mdpRenit', 
+        'mdpOublie', 
+        'second_authenticator'
+    ];
 
-            $slug = pathinfo($file, PATHINFO_FILENAME);
+    // Mapping : slug fichier => [nom d'affichage, slug URL]
+    $pageMapping = [
+        'accueil' => ['Accueil', 'home'],
+        'seConnecter' => ['Se connecter', 'se_connecter'],
+        'sInscrire' => ["S'inscrire", 's_inscrire'],
+        'planDuSite' => ['Plan du site', 'plan_du_site'],
+    ];
 
-            // Ignorer certaines pages
-            if (in_array($slug, ['bienvenue', 'forgot', 'password_reset', 'logout', 'mdpRenit', 'mdpOublie', 'second_authenticator', ], true)) {
-                continue;
-            }
+    // ─────────────── Traitement ───────────────
+    
+    foreach (scandir($dirDisk) as $file) {
+        if ($file[0] === '.') continue;
 
-            $displayName = $slug === 'accueil' ? 'Accueil' : $slug;
-            $linkSlug    = $slug === 'accueil' ? 'home' : $slug;
-            $displayName = $slug === 'seConnecter' ? 'SeConnecter' : $slug;
-            $linkSlug    = $slug === 'seConnecter' ? 'se_connecter' : $slug;
+        $slug = pathinfo($file, PATHINFO_FILENAME);
 
-            $this->pages[] = [
-                'name' => $displayName,
-                'url'  => $this->baseUrl . '/?page=' . rawurlencode($linkSlug),
-            ];
+        // Ignorer les pages de la liste noire
+        if (in_array($slug, $ignoredPages, true)) {
+            continue;
         }
 
-        // Tri alphabétique
-        usort($this->pages, fn($a, $b) => strcasecmp($a['name'], $b['name']));
+        // Utiliser le mapping si disponible, sinon valeurs par défaut
+        if (isset($pageMapping[$slug])) {
+            [$displayName, $linkSlug] = $pageMapping[$slug];
+        } else {
+            // Fallback : transformer le slug en nom lisible
+            // exemple: "ma_page_test" => "Ma page test"
+            $displayName = ucfirst(str_replace('_', ' ', $slug));
+            $linkSlug = $slug;
+        }
+
+        $this->pages[] = [
+            'name' => $displayName,
+            'url'  => $this->baseUrl . '?page=' . rawurlencode($linkSlug)
+        ];
     }
+
+    // Tri alphabétique
+    usort($this->pages, fn($a, $b) => strcasecmp($a['name'], $b['name']));
+}
 
     public function render(): void
     {
