@@ -31,7 +31,7 @@ class PlanDuSiteController
         $pageCss = ["planDuSite.css", $styleDynamique];
         $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
 
-        buildPages();
+        $this->buildPages();
     }
 
     public function buildPages(): void
