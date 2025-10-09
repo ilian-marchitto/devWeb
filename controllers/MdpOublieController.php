@@ -9,6 +9,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 use models\UserModels;
+use PDO;
 
 class MdpOublieController
 {
@@ -22,9 +23,11 @@ class MdpOublieController
     private string $author;
     private array $cssFiles = [];
     public $message;
+    public $head;
+    public $styleDynamique;
     
 
-    public function __construct($connection)
+    public function __construct(PDO $connection)
     {
         $this->connection = $connection;
         global $mailHost, $mailUsername, $mailPwd;
@@ -35,7 +38,7 @@ class MdpOublieController
 
         // ─────────────── Gestion du thème ───────────────
         ToggleButtonController::handleThemeToggle();
-        $styleDynamique = ToggleButtonController::getActiveStyle();
+        $this->styleDynamique = ToggleButtonController::getActiveStyle();
 
         $pageTitle = "mot de passe oublié";
         $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Retrouvez votre mot de passe grâce à cette page.";
