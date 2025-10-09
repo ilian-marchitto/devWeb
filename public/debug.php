@@ -1,38 +1,54 @@
-<?php
+php<?php
 // debug.php
 define('BASE_PATH', dirname(__DIR__));
+define('PUBLIC_PATH', BASE_PATH . '/public');
 
-echo "<h2>Diagnostic</h2>";
-echo "<strong>BASE_PATH:</strong> " . BASE_PATH . "<br>";
-echo "<strong>Séparateur:</strong> " . DIRECTORY_SEPARATOR . "<br><br>";
+echo "<h2>Test Autoloader</h2>";
 
-// Vérifier la structure
-$controllers_dir = BASE_PATH . DIRECTORY_SEPARATOR . 'controllers';
-echo "<strong>Dossier controllers:</strong> " . $controllers_dir . "<br>";
-echo "Existe ? " . (is_dir($controllers_dir) ? "OUI" : "NON") . "<br><br>";
-
-// Lister les fichiers dans controllers
-if (is_dir($controllers_dir)) {
-    echo "<strong>Fichiers dans controllers:</strong><br>";
-    $files = scandir($controllers_dir);
-    foreach ($files as $file) {
-        if ($file !== '.' && $file !== '..') {
-            echo "- $file<br>";
-        }
-    }
+// Charger l'autoloader
+echo "1. Chargement de l'autoloader...<br>";
+if (file_exists(PUBLIC_PATH . '/AutoLoader.php')) {
+    require_once PUBLIC_PATH . '/AutoLoader.php';
+    echo "✓ AutoLoader.php chargé<br><br>";
+} else {
+    die("✗ AutoLoader.php introuvable dans " . PUBLIC_PATH);
 }
 
-// Tester le chemin exact d'AccueilController
-$accueil_file = BASE_PATH . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'AccueilController.php';
-echo "<br><strong>Chemin AccueilController:</strong> " . $accueil_file . "<br>";
-echo "Existe ? " . (file_exists($accueil_file) ? "OUI" : "NON") . "<br><br>";
+// Tester le chargement d'une classe
+echo "2. Test de chargement de la classe controllers\AccueilController<br>";
 
-// Afficher les 3 premières lignes du fichier s'il existe
-if (file_exists($accueil_file)) {
-    echo "<strong>Début du fichier AccueilController.php:</strong><br>";
-    $lines = file($accueil_file);
-    echo "<pre>";
-    echo htmlspecialchars(implode('', array_slice($lines, 0, 5)));
-    echo "</pre>";
+try {
+    // Vérifier si la classe peut être chargée
+    if (class_exists('controllers\AccueilController', true)) {
+        echo "✓ La classe controllers\AccueilController a été chargée !<br>";
+    } else {
+        echo "✗ La classe controllers\AccueilController n'existe pas<br>";
+    }
+} catch (Exception $e) {
+    echo "✗ Erreur: " . $e->getMessage() . "<br>";
+}
+
+echo "<br>3. Test de chargement manuel<br>";
+$manual_file = BASE_PATH . '/controllers/AccueilController.php';
+echo "Fichier: $manual_file<br>";
+if (file_exists($manual_file)) {
+    require_once $manual_file;
+    echo "✓ Fichier chargé manuellement<br>";
+    
+    if (class_exists('controllers\AccueilController', false)) {
+        echo "✓ La classe existe maintenant !<br>";
+    } else {
+        echo "✗ La classe n'existe toujours pas après require_once<br>";
+    }
+} else {
+    echo "✗ Fichier introuvable<br>";
+}
+
+echo "<br>4. Liste des classes déclarées contenant 'Accueil':<br>";
+$classes = get_declared_classes();
+foreach ($classes as $class) {
+    if (stripos($class, 'accueil') !== false) {
+        echo "- $class<br>";
+    }
 }
 ?>
