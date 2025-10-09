@@ -7,7 +7,7 @@ require_once BASE_PATH . '/config.php';
 define('CONTROLLERS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'controllers');
 define('MODELS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'models');
 
-require_once BASE_PATH . '/AutoLoader.php';
+require_once PUBLIC_PATH . '/AutoLoader.php';
 
 define('VIEWS_PATH', BASE_PATH . '/views');
 define('PUBLIC_PATH', BASE_PATH . '/public');
@@ -106,8 +106,6 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/AccueilController.php',
     'plan_du_site' => CONTROLLERS_PATH . '/PlanDuSiteController.php',
     'bienvenue' => CONTROLLERS_PATH . '/BienvenueController.php',
     'logout' => CONTROLLERS_PATH . '/SeDeconnecterController.php',
-    'signup' => CONTROLLERS_PATH . '/SInscrireController.php',
-    'login' => CONTROLLERS_PATH . '/SeConnecterController.php',
     'forgot' => CONTROLLERS_PATH . '/MdpOublieController.php',
     'password_reset' => CONTROLLERS_PATH . '/MdpRenitController.php',
     'second_authenticator' => CONTROLLERS_PATH . '/DoubleAuthentificationController.php',];
