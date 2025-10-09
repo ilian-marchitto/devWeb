@@ -21,7 +21,7 @@ require_once PUBLIC_PATH . '/AutoLoader.php';
 // ─────────────── URLs publiques ───────────────
 
 // Lien principal
-define('BASE_URL', 'https://fan2jul.alwaysdata.net');
+define('BASE_URL', 'https://fan2jul.alwaysdata.net/');
 
 
 // Sous-dossiers Public
