@@ -2,6 +2,7 @@
 
 namespace controllers;
 use models\UserModels;
+use PDO;
 
 class BienvenueController
 {
