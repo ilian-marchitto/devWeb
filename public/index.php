@@ -35,17 +35,17 @@ define('IMAGES_URL', ASSETS_URL . '/images');
 // Récupérer le paramètre 'page', sinon définir 'home' par défaut
 $page = filter_input(INPUT_GET, 'page') ?? 'home';
 
-use controllers/AccueilController;
-use controllers/BienvenueController;
-use controllers/SeConnecterController;
-use controllers/DoubleAuthentificationController;
-use controllers/SInscrireController;
-use controllers/SeDeconnecterController;
-use controllers/PlanDuSiteController;
-use controllers/FooterController;
-use controllers/Builder;
-use controllers/MdpOublieController;
-use controllers/MdpRenitController;
+use controllers\AccueilController;
+use controllers\BienvenueController;
+use controllers\SeConnecterController;
+use controllers\DoubleAuthentificationController;
+use controllers\SInscrireController;
+use controllers\SeDeconnecterController;
+use controllers\PlanDuSiteController;
+use controllers\FooterController;
+use controllers\Builder;
+use controllers\MdpOublieController;
+use controllers\MdpRenitController;
 
 switch ($page) {
 
