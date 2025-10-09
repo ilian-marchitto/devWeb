@@ -1,27 +1,35 @@
 <?php
 
-// Définir les variables d'environnement en local
-$host = getenv('DB_HOST');
-$port = getenv('DB_PORT');
-$db   = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$pwd  = getenv('DB_PASS');
+// Informations de connexion
+$host = "mysql-fan2jul.alwaysdata.net";    // ou l'adresse IP du serveur PostgreSQL
+$port = "3306";         // port par défaut PostgreSQL
+$db   = "fan2jul_database";      // nom de ta base de données
+$user = "fan2jul";     // ton utilisateur PostgreSQL
+$pwd  = "jullesang123";   // mot de passe utilisateur
 
-$mailHost = getenv('DB_MAIL_HOST');
-$mailUsername = getenv('DB_MAIL_USERNAME');
-$mailPwd = getenv('DB_MAIL_PWD');
+
+$mailHost = 'smtp-fan2jul.alwaysdata.net';
+$mailUsername = 'fan2jul@alwaysdata.net'; // Ton email Alwaysdata
+$mailPwd = 'cestuntest';         // Ton mot de passe
+
 
 try {
-    $dsn = "mysql:host=$host; port=$port; dbname=$db";
-    $connection = new PDO($dsn, $user, $pwd);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $connection->exec('SET CHARACTER SET utf8');
+    // DSN PostgreSQL
+    $dsn = "mysql:host=$host;port=$port;dbname=$db";
 
-    // ✅ Connexion réussie → console JS
-    echo "<script>console.log('✅ Connexion réussie à la base {$db}');</script>";
+
+    // Création de la connexion PDO
+    $connection = new PDO($dsn, $user, $pwd);
+
+
+    // Mode d'erreur : exceptions
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+    // Codage de caractères.
+    $connection->exec('SET CHARACTER SET utf8');
 } catch (PDOException $e) {
-    // ❌ Erreur de connexion → console JS
-    $msg = addslashes($e->getMessage()); // Échapper les quotes
-    echo "<script>console.error('❌ Erreur de connexion : {$msg}');</script>";
+    echo "❌ Erreur de connexion : " . $e->getMessage();
 }
-?>
+//https://fan2jul.alwaysdata.net/
+//http://localhost/devWeb/public

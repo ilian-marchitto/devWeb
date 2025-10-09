@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle) ?></title>
+    <title><?= htmlspecialchars($this->head->getPageTitle()) ?></title>
 
-    <?php if(!empty($description)): ?>
-        <meta name="description" content="<?= htmlspecialchars($description) ?>">
+    <?php if(!empty($this->head->getDescription())): ?>
+        <meta name="description" content="<?= htmlspecialchars($this->head->getDescription()) ?>">
     <?php endif; ?>
 
-    <?php if(!empty($pageKeywords)): ?>
-        <meta name="keywords" content="<?= htmlspecialchars($pageKeywords) ?>">
+    <?php if(!empty($this->head->getKeywords())): ?>
+        <meta name="keywords" content="<?= htmlspecialchars($this->head->getKeywords()) ?>">
     <?php endif; ?>
 
-    <meta name="author" content="<?= htmlspecialchars($pageAuthor) ?>">
+    <meta name="author" content="<?= htmlspecialchars($this->head->getAuthor()) ?>">
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,16 +28,9 @@
     <link rel="apple-touch-icon" sizes="120x120" href="Jul2tp.webp">
 
     <!-- CSS -->
-    <?php if(!empty($pageCss)): ?>
-        <?php foreach($pageCss as $file): ?>
+    <?php if(!empty($this->head->getCssFiles())): ?>
+        <?php foreach($this->head->getCssFiles() as $file): ?>
             <link rel="stylesheet" href="<?= CSS_URL . '/' . htmlspecialchars($file) ?>">
-        <?php endforeach; ?>
-    <?php endif; ?>
-
-    <!-- JS -->
-    <?php if(!empty($jsFiles)): ?>
-        <?php foreach($jsFiles as $file): ?>
-            <script src="<?= BASE_URL . '/js/' . htmlspecialchars($file) ?>" defer></script>
         <?php endforeach; ?>
     <?php endif; ?>
 </head>

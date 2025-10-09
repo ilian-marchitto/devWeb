@@ -14,8 +14,8 @@
         </ul>
     </nav>
 
-    <?php foreach ($FontItems->getItems() as $item): ?>
-        <?php $FontItems->showOnce($item); ?>
+    <?php foreach ($fontItems->getItems() as $item): ?>
+        <?php $fontItems->showOnce($item); ?>
     <?php endforeach; ?>
 
 

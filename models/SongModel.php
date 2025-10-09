@@ -1,8 +1,8 @@
 <?php
 
-require_once BASE_PATH . '/config.php';
-namespace App\Models;
+namespace models;
 use PDO;
+
 class SongModel {
     private $connection;
     public function __construct(PDO $connection) {
@@ -38,6 +38,17 @@ class SongModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getRandomSong(): ?array
+    {
+        $sql = "SELECT ids, title, url 
+            FROM song
+            ORDER BY RAND() 
+            LIMIT 1";
+        $stmt = $this->connection->query($sql);
+        $song = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $song ?: null;
+    }
+
     // ─────────────── UPDATE ───────────────
     public function updateSong(int $ids, string $title, string $url): bool {
         $sql = "UPDATE songs 
@@ -58,15 +69,7 @@ class SongModel {
         return $stmt->execute([':ids' => $ids]);
     }
 
-    public function getRandomSong(): ?array {
-        $sql = "SELECT ids, title, url 
-            FROM song
-            ORDER BY RAND() 
-            LIMIT 1";
-        $stmt = $this->connection->query($sql);
-        $song = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $song ?: null;
-    }
+    
 
 
 }

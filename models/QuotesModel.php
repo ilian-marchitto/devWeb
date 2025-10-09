@@ -1,8 +1,8 @@
 <?php
 
-require_once BASE_PATH . '/config.php';
-namespace App\Models;
+namespace models;
 use PDO;
+
 class QuoteModel {
     private $connection;
     public function __construct(PDO $connection) {

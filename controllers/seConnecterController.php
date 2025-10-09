@@ -1,24 +1,29 @@
 <?php
-session_start();
-
+namespace controllers;
+use PDO;
+use PDOException;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require_once BASE_PATH . '/config.php';
-require_once CONTROLLERS_PATH . '/HeadController.php';
-require_once CONTROLLERS_PATH . '/toggleButtonController.php';
 
 class SeConnecterController
 {
     private PDO $connection;
-    private HeadController $head;
+    public $head;
+    public $pageTitle;
+    public $pageDescription;
+    public $pageKeywords;
+    public $pageCss;
+    public $pageAuthor;
+
+
 
     public function __construct(PDO $connection)
     {
         $this->connection = $connection;
-    }
 
-    public function handleRequest(): void
-    {
-        toggleButtonController::handleThemeToggle();
-        $styleDynamique = toggleButtonController::getActiveStyle();
+        ToggleButtonController::handleThemeToggle();
+        $styleDynamique = ToggleButtonController::getActiveStyle();
 
         // ==========================
         // Variables spécifiques à la page
@@ -28,21 +33,14 @@ class SeConnecterController
         $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, connexion";
         $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
         $pageCss = ["seConnecter.css", $styleDynamique];
-
-        // ==========================
-        // Contrôleur Head
-        // ==========================
         $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
-
-        // Affiche la page
-        require_once LAYOUT_PATH . '/head.php';
-        require_once PAGES_PATH . '/seConnecter.php';
 
         // Si le formulaire est soumis
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->processLogin();
         }
     }
+        
 
     private function processLogin(): void
     {
@@ -63,6 +61,39 @@ class SeConnecterController
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($mot_de_passe, $user['password'])) {
+                $code = random_int(100000, 999999);
+                $_SESSION['2fa_code'] = $code;
+                $_SESSION['2fa_user'] = $user; // garde l’utilisateur temporairement
+                $_SESSION['2fa_expires'] = time() + 600; // 10 minutes = 600 sec
+
+                //PHPMailer
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = $mailHost;
+                    $mail->SMTPAuth = true;
+                    $mail->Username = $mailUsername;
+                    $mail->Password = $mailPwd;
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+
+                    $mail->setFrom($mailUsername, 'fan2jul');
+                    $mail->addAddress($identifiant);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = "Ton code de vérification";
+                    $mail->Body = "Bonjour,<br><br>Ton code de vérification est le suivant :<br>
+                           <b>$code</b><br><br>Ce code expire dans 10 minutes.<br>
+                           Si tu n'as pas demandé cette opération, ignore ce message.";;
+                    $mail->send();
+
+                    header("Location:" . BASE_URL . "/index.php?page=secondAuthenticator");
+                    exit;
+                } catch (Exception $e) {
+                    $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
+                }
+
+
                 session_regenerate_id(true);
                 $_SESSION["user_id"]   = $user["idu"];
                 $_SESSION["email"]     = $user["email"];
@@ -82,7 +113,15 @@ class SeConnecterController
 
     private function redirectToLogin(): void
     {
-        header("Location: " . BASE_URL . "/index.php?page=seConnecter");
+        header("Location: " . BASE_URL . "/index.php?page=se_connecter");
         exit;
+    }
+
+    public function render(): void{
+        $vars = get_object_vars($this);
+        extract($vars);
+
+        require_once LAYOUT_PATH . '/head.php';
+        require_once PAGES_PATH . '/seConnecter.php';
     }
 }

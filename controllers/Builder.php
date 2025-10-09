@@ -1,5 +1,6 @@
 <?php
 
+namespace controllers;
 class Builder
 {
     private $items = [];

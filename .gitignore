@@ -13,4 +13,5 @@
 
 config.php
 index.php
-local.php
+local.php 
+vendor/*

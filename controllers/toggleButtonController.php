@@ -1,9 +1,7 @@
 <?php
 declare(strict_types=1);
 
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
+namespace controllers;
 
 class ToggleButtonController
 {
@@ -32,7 +30,7 @@ class ToggleButtonController
             ]);
 
             // Recharge la page sans le paramètre toggle_style (optionnel mais propre)
-            $homeUrl = 'https://fan2jul.alwaysdata.net/index.php?page=home';
+            $homeUrl = 'http://localhost/devWeb/public?page=home';
             header("Location: $homeUrl");
             exit;
         

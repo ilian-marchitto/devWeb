@@ -1,6 +1,6 @@
 <?php
 
-require_once CONTROLLERS_PATH . '/Builder.php';
+namespace controllers;
 class FooterController extends Builder
 {
     public function __construct()

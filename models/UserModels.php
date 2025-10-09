@@ -1,8 +1,8 @@
 <?php
 
-require_once BASE_PATH . '/config.php';
-namespace App\Models;
+namespace models;
 use PDO;
+
 class UserModels {
 
     private $connection;

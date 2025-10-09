@@ -1,9 +1,7 @@
 <?php
 // controllers/HeaderController.php
 
-include CONTROLLERS_PATH . '/Builder.php';
-require_once  CONTROLLERS_PATH .'/toggleButtonController.php';
-
+namespace controllers;
 $isLoggedIn = isset($_SESSION['email']);
 
 class HeaderController
@@ -32,8 +30,8 @@ class HeaderController
         if ($isLoggedIn) {
             $this->buttonHtml->addItemsLink("Se déconnecter", BASE_URL . '/index.php?page=logout');
         } else {
-            $this->buttonHtml->addItemsLink("Se connecter", BASE_URL . '/index.php?page=seConnecter');
-            $this->buttonHtml->addItemsLink("S'inscrire", BASE_URL . '/index.php?page=sInscrire');
+            $this->buttonHtml->addItemsLink("Se connecter", BASE_URL . '/index.php?page=se_connecter');
+            $this->buttonHtml->addItemsLink("S'inscrire", BASE_URL . '/index.php?page=s_inscrire');
         }
     }
 
@@ -51,11 +49,4 @@ class HeaderController
     }
 }
 
-$header = new HeaderController($isLoggedIn);
-$toggleButton = new toggleButtonController();
-
-// Récupération des items à passer à la vue
-$navItems = $header->getNavItems();
-$buttonItems = $header->getButtonItems();
-$FontItems = $header->getFontItems();
 
