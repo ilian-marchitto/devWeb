@@ -19,6 +19,10 @@ class PlanDuSiteController
         $this->viewsPath = $viewsPath;
         $this->baseUrl = $baseUrl;
         
+        // ─────────────── Gestion du thème ───────────────
+        ToggleButtonController::handleThemeToggle();
+        $styleDynamique = ToggleButtonController::getActiveStyle();
+
         // ───────────── Head ─────────────
         $pageTitle = "Plan du site";
         $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Découvrez les différentes pages de notre site.";
