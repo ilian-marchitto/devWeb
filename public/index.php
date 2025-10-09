@@ -53,7 +53,6 @@ $page = filter_input(INPUT_GET, 'page') ?? 'home';
 switch ($page) {
 
     case 'home':
-        if (!file_exists($file)) { var_dump($file); exit('Fichier introuvable'); }
         $controller = new AccueilController($connection);
         $controller->render();
         break;
