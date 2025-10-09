@@ -13,6 +13,9 @@ class DoubleAuthentificationController
     public $pageKeywords;
     public $pageCss;
     public $pageAuthor;
+    public $success;
+    public $erreur;
+    private PDO $connection;
 
     public function __construct(PDO $connection)
     {
@@ -20,7 +23,7 @@ class DoubleAuthentificationController
         $this->connection = $connection;
 
         ToggleButtonController::handleThemeToggle();
-        $styleDynamique = ToggleButtonController::getActiveStyle();
+        $this->styleDynamique = ToggleButtonController::getActiveStyle();
 
         // ==========================
         // Métadonnées de la page
