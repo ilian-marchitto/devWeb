@@ -9,14 +9,16 @@ class BienvenueController
     private string $prenom;
     private string $initiale;
     private HeadController $head;
+    private PDO $connection;
+    private string $styleDynamique;
 
     public function __construct($connection)
     {
         $this->connection = $connection;
 
         // ─────────────── Gestion du thème ───────────────
-        toggleButtonController::handleThemeToggle();
-        $this->styleDynamique = toggleButtonController::getActiveStyle();
+        ToggleButtonController::handleThemeToggle();
+        $this->styleDynamique = ToggleButtonController::getActiveStyle();
 
         // ─────────────── Protection de la page ───────────────
         if (!isset($_SESSION['firstname'])) {
