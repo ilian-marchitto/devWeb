@@ -4,8 +4,8 @@ session_start();
 define('BASE_PATH', dirname(__DIR__));
 require_once BASE_PATH . '/config.php';
 // Sous-dossiers
-define('CONTROLLERS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'controllers');
-define('MODELS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'models');
+define('CONTROLLERS_PATH', BASE_PATH  . 'controllers');
+define('MODELS_PATH', BASE_PATH  . 'models');
 
 
 
