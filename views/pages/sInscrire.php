@@ -41,7 +41,7 @@
 
         <button type="submit">Créer le compte</button>
         <p class="forgot"><a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a></p>
-        <p>Déjà un compte ? <a href="<?= BASE_URL ?>/index.php?page=seConnecter">Connecte toi</a></p>
+        <p>Déjà un compte ? <a href="<?= BASE_URL ?>/index.php?page=se_connecter">Connecte toi</a></p>
     </form>
 </div>
 </body>
