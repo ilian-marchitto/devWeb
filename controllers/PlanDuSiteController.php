@@ -36,63 +36,53 @@ class PlanDuSiteController
 
     public function buildPages(): void
     {
-    $dirDisk = $this->viewsPath;
-    $this->pages = [];
-
-    if (!is_dir($dirDisk)) return;
-
-    // ─────────────── Configuration centralisée ───────────────
-    
-    // Pages à ignorer complètement
-    $ignoredPages = [
-        'bienvenue', 
-        'forgot', 
-        'password_reset', 
-        'mdpRenit', 
-        'mdpOublie', 
-        'DoubleAuthentification',
-        'SeDeconnecter',
-    ];
-
-    // Mapping : slug fichier => [nom d'affichage, slug URL]
-    $pageMapping = [
-        'accueil' => ['Accueil', 'home'],
-        'seConnecter' => ['Se connecter', 'se_connecter'],
-        'sInscrire' => ["S'inscrire", 's_inscrire'],
-        'planDuSite' => ['Plan du site', 'plan_du_site'],
-    ];
-
-    // ─────────────── Traitement ───────────────
-    
-    foreach (scandir($dirDisk) as $file) {
-        if ($file[0] === '.') continue;
-
-        $slug = pathinfo($file, PATHINFO_FILENAME);
-
-        // Ignorer les pages de la liste noire
-        if (in_array($slug, $ignoredPages, true)) {
-            continue;
-        }
-
-        // Utiliser le mapping si disponible, sinon valeurs par défaut
-        if (isset($pageMapping[$slug])) {
-            [$displayName, $linkSlug] = $pageMapping[$slug];
-        } else {
-            // Fallback : transformer le slug en nom lisible
-            // exemple: "ma_page_test" => "Ma page test"
-            $displayName = ucfirst(str_replace('_', ' ', $slug));
-            $linkSlug = $slug;
-        }
-
-        $this->pages[] = [
-            'name' => $displayName,
-            'url'  => $this->baseUrl . '?page=' . rawurlencode($linkSlug)
+        // ─────────────── Configuration centralisée ───────────────
+        
+        // Pages à ignorer dans le plan du site
+        $ignoredPages = [
+            'bienvenue',
+            'logout',
+            'forgot',
+            'password_reset',
+            'second_authenticator'
         ];
-    }
 
-    // Tri alphabétique
-    usort($this->pages, fn($a, $b) => strcasecmp($a['name'], $b['name']));
-}
+        // Mapping : slug route => nom d'affichage personnalisé
+        $pageMapping = [
+            'home' => 'Accueil',
+            'se_connecter' => 'Se connecter',
+            's_inscrire' => "S'inscrire",
+            'plan_du_site' => 'Plan du site',
+        ];
+
+        // ─────────────── Utiliser les routes définies dans index.php ───────────────
+        
+        // Récupérer les routes depuis le contexte global (définies dans index.php)
+        global $routes;
+        
+        if (empty($routes)) {
+            error_log("PlanDuSiteController: Aucune route trouvée");
+            return;
+        }
+
+        foreach ($routes as $routeSlug => $controllerPath) {
+            // Ignorer les pages de la liste noire
+            if (in_array($routeSlug, $ignoredPages, true)) {
+                continue;
+            }
+
+            // Utiliser le nom personnalisé ou générer un nom par défaut
+            $displayName = $pageMapping[$routeSlug] ?? ucfirst(str_replace('_', ' ', $routeSlug));
+
+            $this->pages[] = [
+                'name' => $displayName,
+                'url'  => $this->baseUrl . '?page=' . rawurlencode($routeSlug)
+            ];
+        }
+
+        // Tri alphabétique
+        usort($this->pages, fn($a, $b) => strcasecmp($a['name'], $b['name']));
+    }
 
     public function render(): void
     {
