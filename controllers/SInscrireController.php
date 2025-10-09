@@ -13,7 +13,6 @@ use PHPMailer\PHPMailer\SMTP;
 
 class SInscrireController
 {
-    private PDO $connection;
     private string $styleDynamique;
     private string $mailHost;
     private string $mailUsername;
@@ -25,7 +24,7 @@ class SInscrireController
     public $pageCss;
     public $pageAuthor;
 
-    public function __construct(PDO $connection)
+    public function __construct($connection)
     {
         global $mailHost, $mailUsername, $mailPwd;
         $this->connection = $connection;
