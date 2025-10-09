@@ -13,6 +13,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 class SInscrireController
 {
+    private PDO $connection;
     private string $styleDynamique;
     private string $mailHost;
     private string $mailUsername;
@@ -24,7 +25,7 @@ class SInscrireController
     public $pageCss;
     public $pageAuthor;
 
-    public function __construct($connection)
+    public function __construct(PDO $connection)
     {
         global $mailHost, $mailUsername, $mailPwd;
         $this->connection = $connection;
@@ -32,8 +33,8 @@ class SInscrireController
         $this->mailUsername = $mailUsername;
         $this->mailPwd = $mailPwd;
 
-        toggleButtonController::handleThemeToggle();
-        $this->styleDynamique = toggleButtonController::getActiveStyle();
+        ToggleButtonController::handleThemeToggle();
+        $this->styleDynamique = ToggleButtonController::getActiveStyle();
 
         // ==========================
         // Variables spécifiques à la page
