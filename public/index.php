@@ -7,7 +7,7 @@ require_once BASE_PATH . '/config.php';
 define('CONTROLLERS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'controllers');
 define('MODELS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'models');
 
-require_once PUBLIC_PATH . '/AutoLoader.php';
+
 
 define('VIEWS_PATH', BASE_PATH . '/views');
 define('PUBLIC_PATH', BASE_PATH . '/public');
@@ -16,7 +16,7 @@ define ('PHPMAILER_PATH', BASE_PATH . '/vendor/phpmailer/phpmailer/src');
 // Sous-dossiers Views
 define('PAGES_PATH', VIEWS_PATH . '/pages');
 define('LAYOUT_PATH', VIEWS_PATH . '/layout');
-
+require_once PUBLIC_PATH . '/AutoLoader.php';
 
 // ─────────────── URLs publiques ───────────────
 
