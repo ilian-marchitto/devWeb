@@ -30,6 +30,8 @@ class PlanDuSiteController
         $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
         $pageCss = ["planDuSite.css", $styleDynamique];
         $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+
+        buildPages();
     }
 
     public function buildPages(): void
