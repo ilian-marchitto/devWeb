@@ -9,6 +9,9 @@ require_once BASE_PATH . '/config.php';
 class SeConnecterController
 {
     private PDO $connection;
+    private string $mailHost;
+    private string $mailUsername;
+    private string $mailPwd;
     public $head;
     public $pageTitle;
     public $pageDescription;
@@ -20,7 +23,11 @@ class SeConnecterController
 
     public function __construct(PDO $connection)
     {
+        global $mailHost, $mailUsername, $mailPwd;
         $this->connection = $connection;
+        $this->mailHost = $mailHost;
+        $this->mailUsername = $mailUsername;
+        $this->mailPwd = $mailPwd;
 
         ToggleButtonController::handleThemeToggle();
         $styleDynamique = ToggleButtonController::getActiveStyle();
@@ -54,7 +61,7 @@ class SeConnecterController
             $this->redirectToLogin();
         }
 
-        /*try {
+        try {
             $sql = "SELECT idu, email, firstname, password FROM users WHERE email = :email LIMIT 1";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([':email' => $identifiant]);
@@ -63,21 +70,21 @@ class SeConnecterController
             if ($user && password_verify($mot_de_passe, $user['password'])) {
                 $code = random_int(100000, 999999);
                 $_SESSION['2fa_code'] = $code;
-                $_SESSION['2fa_user'] = $user; // garde l’utilisateur temporairement
-                $_SESSION['2fa_expires'] = time() + 600; // 10 minutes = 600 sec
-
+                $_SESSION['2fa_user'] = $user;
+                $_SESSION['2fa_expires'] = time() + 600;
+            
                 //PHPMailer
                 $mail = new PHPMailer(true);
                 try {
                     $mail->isSMTP();
-                    $mail->Host = $mailHost;
+                    $mail->Host = $this->mailHost;
                     $mail->SMTPAuth = true;
-                    $mail->Username = $mailUsername;
-                    $mail->Password = $mailPwd;
+                    $mail->Username = $this->mailUsername;
+                    $mail->Password = $this->mailPwd;
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
 
-                    $mail->setFrom($mailUsername, 'fan2jul');
+                    $mail->setFrom($this->mailUsername, 'fan2jul');
                     $mail->addAddress($identifiant);
 
                     $mail->isHTML(true);
@@ -101,7 +108,8 @@ class SeConnecterController
 
                 header("Location: " . BASE_URL . "/index.php?page=bienvenue");
                 exit;
-            } else {
+            }
+            else {
                 $_SESSION['erreur'] = "Identifiant ou mot de passe incorrect.";
                 $this->redirectToLogin();
             }
@@ -109,7 +117,7 @@ class SeConnecterController
             $_SESSION['erreur'] = "Erreur lors de la connexion : " . $e->getMessage();
             $this->redirectToLogin();
         }
-        */
+        
     }
 
     private function redirectToLogin(): void
