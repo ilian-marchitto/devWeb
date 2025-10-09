@@ -20,7 +20,7 @@ class DoubleAuthentificationController
         $this->connection = $connection;
 
         ToggleButtonController::handleThemeToggle();
-        $this->styleDynamique = ToggleButtonController::getActiveStyle();
+        $styleDynamique = ToggleButtonController::getActiveStyle();
 
         // ==========================
         // Métadonnées de la page
