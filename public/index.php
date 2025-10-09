@@ -11,7 +11,7 @@ define('MODELS_PATH', BASE_PATH  . 'models');
 
 define('VIEWS_PATH', BASE_PATH . '/views');
 define('PUBLIC_PATH', BASE_PATH . '/public');
-define ('PHPMAILER_PATH', BASE_PATH . '/vendor/phpmailer/phpmailer/src');
+
 
 // Sous-dossiers Views
 define('PAGES_PATH', VIEWS_PATH . '/pages');

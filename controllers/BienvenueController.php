@@ -1,7 +1,7 @@
 <?php
 
 namespace controllers;
-use Models\UserModels;
+use models\UserModels;
 
 class BienvenueController
 {
