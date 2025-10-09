@@ -1,20 +1,60 @@
 <?php
 
 namespace controllers;
+require BASE_PATH . '/vendor/PHPMailer/src/PHPMailer.php';
+require BASE_PATH . '/vendor/PHPMailer/src/Exception.php';
+require BASE_PATH . '/vendor/PHPMailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 use models\UserModels;
 
 class MdpOublieController
 {
+    private string $mailHost;
+    private string $mailUsername;
+    private string $mailPwd;
     private $connection;
-    private $mailConfig;
+    private string $pageTitle;
+    private string $description;
+    private string $keywords;
+    private string $author;
+    private array $cssFiles = [];
+    
 
-    public function __construct($connection, $mailConfig)
+    public function __construct($connection)
     {
         $this->connection = $connection;
-        $this->mailConfig = $mailConfig;
+        global $mailHost, $mailUsername, $mailPwd;
+        $this->connection = $connection;
+        $this->mailHost = $mailHost;
+        $this->mailUsername = $mailUsername;
+        $this->mailPwd = $mailPwd;
+
+        // ─────────────── Gestion du thème ───────────────
+        ToggleButtonController::handleThemeToggle();
+        $styleDynamique = ToggleButtonController::getActiveStyle();
+
+        $pageTitle = "mot de passe oublié";
+        $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Retrouvez votre mot de passe grâce à cette page.";
+        $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, mot de passe oublié";
+        $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+        $pageCss = ["seConnecter.css",  $styleDynamique];
+        $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+        
+        $this->handleRequest();
+    }
+
+    public function render(): void
+    {
+
+        $vars = get_object_vars($this);
+        extract($vars);
+
+        require_once LAYOUT_PATH . '/head.php';
+        include PAGES_PATH . '/mdpOublie.php';
+       
     }
 
     public function handleRequest()
@@ -23,56 +63,59 @@ class MdpOublieController
         $success = '';
         $message = '';
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $error = "Aucune donnée reçue.";
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
             include PAGES_PATH . '/mdpOublie.php';
-            return;
+        
+            $email = trim($_POST['email'] ?? '');
+            if (empty($email)) {
+                $error = "Email requis.";
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                $error = "Aucune donnée reçue.";
+            }
+
+            
+            
+            // Message générique (toujours affiché)
+            $message = "Si un compte existe pour cet email, tu recevras un message contenant un lien.";
+
+            $userModel = new UserModels($this->connection);
+            $userData = $userModel->findByEmail($email);
+
+            
+
+            if ($userData) {
+                // Générer token et enregistrer
+                $token = bin2hex(random_bytes(16));
+                $expires = (new \DateTime('+1 hour'))->format('Y-m-d H:i:s');
+                $userModel->saveResetToken($email, $token, $expires);
+
+                // Lien de réinitialisation
+                $link = BASE_URL . "/index.php?page=password_reset&token=" . urlencode($token);
+
+                // Envoi du mail
+                $this->sendResetMail($email, $link, $success, $error);
+
+                
+            }
         }
-
-        $email = trim($_POST['email'] ?? '');
-        if (empty($email)) {
-            $error = "Email requis.";
-            include PAGES_PATH . '/mdpOublie.php';
-            return;
-        }
-
-        // Message générique (toujours affiché)
-        $message = "Si un compte existe pour cet email, tu recevras un message contenant un lien.";
-
-        $userModel = new UserModels($this->connection);
-        $userData = $userModel->findByEmail($email);
-
-        if ($userData) {
-            // Générer token et enregistrer
-            $token = bin2hex(random_bytes(16));
-            $expires = (new \DateTime('+1 hour'))->format('Y-m-d H:i:s');
-            $userModel->saveResetToken($email, $token, $expires);
-
-            // Lien de réinitialisation
-            $link = BASE_URL . "/index.php?page=password_reset&token=" . urlencode($token);
-
-            // Envoi du mail
-            $this->sendResetMail($email, $link, $success, $error);
-        }
-
-        // Vue finale
-        include PAGES_PATH . '/mdpOublie.php';
     }
 
     private function sendResetMail(string $email, string $link, &$success, &$error): void
     {
+        //PHPMailer
         $mail = new PHPMailer(true);
-
         try {
             $mail->isSMTP();
-            $mail->Host       = $this->mailConfig['host'];
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $this->mailConfig['username'];
-            $mail->Password   = $this->mailConfig['password'];
+            $mail->Host = $this->mailHost;
+            $mail->SMTPAuth = true;
+            $mail->Username = $this->mailUsername;
+            $mail->Password = $this->mailPwd;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+            $mail->Port = 587;
 
-            $mail->setFrom($this->mailConfig['username'], 'fan2jul');
+            $mail->setFrom($this->mailUsername, 'fan2jul');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
@@ -84,9 +127,9 @@ class MdpOublieController
                 Ce lien expire dans 1 heure.<br>
                 Si tu n'as pas demandé cette opération, ignore ce message.
             ";
-
             $mail->send();
             $success = "L'e-mail de réinitialisation a bien été envoyé à $email.";
+            exit;
         } catch (Exception $e) {
             $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
         }

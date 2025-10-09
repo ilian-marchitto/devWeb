@@ -29,7 +29,7 @@
             <?php foreach ($buttonItems->getItems() as $item): ?>
                 <?php $buttonItems->showOnce($item); ?>
             <?php endforeach; ?>
-        </di>
+        </div>
     </div>
      <a href="?toggle_style=1" class="toggle-theme-btn">
         <span class="toggle-switch"></span>

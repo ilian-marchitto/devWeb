@@ -1,63 +1,131 @@
 <?php
-
 namespace controllers;
+use PDO;
+use PDOException;
+require BASE_PATH . '/vendor/PHPMailer/src/PHPMailer.php';
+require BASE_PATH . '/vendor/PHPMailer/src/Exception.php';
+require BASE_PATH . '/vendor/PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class SInscrireController
 {
-    public static function register($connection)
+    private PDO $connection;
+    private string $styleDynamique;
+    private string $mailHost;
+    private string $mailUsername;
+    private string $mailPwd;
+    public $head;
+    public $pageTitle;
+    public $pageDescription;
+    public $pageKeywords;
+    public $pageCss;
+    public $pageAuthor;
+
+    public function __construct(PDO $connection)
     {
-        session_start();
+        global $mailHost, $mailUsername, $mailPwd;
+        $this->connection = $connection;
+        $this->mailHost = $mailHost;
+        $this->mailUsername = $mailUsername;
+        $this->mailPwd = $mailPwd;
 
-        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-            return;
+        toggleButtonController::handleThemeToggle();
+        $this->styleDynamique = toggleButtonController::getActiveStyle();
+
+        // ==========================
+        // Variables spécifiques à la page
+        // ==========================
+        $pageTitle = "S'inscrire";
+        $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Inscrivez-vous sur notre site.";
+        $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, inscription";
+        $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+        $pageCss = ["seConnecter.css", $this->styleDynamique];
+        $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
+
+        // Gestion du formulaire
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $this->handleForm();
         }
+    }
 
-        $firstname = trim($_POST["firstname"] ?? '');
-        $lastname  = trim($_POST["lastname"] ?? '');
-        $email     = trim($_POST["email"] ?? '');
-        $password  = $_POST["password"] ?? '';
-        $song_id   = $_POST["song_id"] ?? null;
+    public function render(): void
+    {
+        $vars = get_object_vars($this);
+        extract($vars);
 
-        // Vérification des champs obligatoires
-        if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
-            $_SESSION['erreur'] = "Tous les champs sont obligatoires.";
-            header("Location: " . BASE_URL . "/index.php?page=sInscrire");
-            exit;
-        }
+        require_once LAYOUT_PATH . '/head.php';
+        require_once PAGES_PATH . '/sInscrire.php';
+        
+    }
 
-        // Vérifier si l'email existe déjà
-        $stmt = $connection->prepare("SELECT 1 FROM users WHERE email = :email");
+    private function handleForm(): void
+    {
+        $firstname = trim($_POST["firstname"]);
+        $lastname = trim($_POST["lastname"]);
+        $email = trim($_POST["email"]);
+        $password = $_POST["password"];
+        $song_id = $_POST["song_id"];
+
+        // Vérification de l’unicité de l’email
+        $stmt = $this->connection->prepare("SELECT email FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);
+        $existant = $stmt->fetchAll();
 
-        if ($stmt->fetch()) {
-            $_SESSION['erreuremail'] = "Email déjà utilisé.";
-            header("Location: " . BASE_URL . "/index.php?page=sInscrire");
-            exit;
+        foreach ($existant as $row) {
+            if ($row['email'] === $email) {
+                $_SESSION['erreuremail'] = 'Email déjà utilisé';
+                header("Location:" . BASE_URL . "/index.php?page=s_inscrire");
+                exit;
+            }
         }
 
-        // Création du compte
+        // Création du code d’authentification
+        $code = random_int(100000, 999999);
+        $_SESSION['2fa_code'] = $code;
+        $_SESSION['2fa_expires'] = time() + 600;
+        $_SESSION['Register'] = true;
+        $_SESSION['firstname'] = $firstname;
+        $_SESSION['lastname'] = $lastname;
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+        $_SESSION['song_id'] = $song_id;
+
+        // Envoi du mail
+        $this->sendVerificationMail($email, $code);
+    }
+
+    private function sendVerificationMail(string $email, int $code): void
+    {
+        $mail = new PHPMailer(true);
+
         try {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO users (firstname, lastname, email, password, song_id)
-                      VALUES (:firstname, :lastname, :email, :password, :song_id)";
-            $requete = $connection->prepare($query);
-            $requete->execute([
-                'firstname' => $firstname,
-                'lastname'  => $lastname,
-                'email'     => $email,
-                'password'  => $hash,
-                'song_id'   => $song_id
-            ]);
+            $mail->isSMTP();
+            $mail->Host = $this->mailHost;
+            $mail->SMTPAuth = true;
+            $mail->Username = $this->mailUsername;
+            $mail->Password = $this->mailPwd;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
 
-            $_SESSION["firstname"] = $firstname;
-            $_SESSION["email"] = $email;
+            $mail->setFrom($this->mailUsername, 'Fan2Jul');
+            $mail->addAddress($email);
 
-            header("Location: " . BASE_URL . "/index.php?page=bienvenue");
+            $mail->isHTML(true);
+            $mail->Subject = "Ton code de vérification";
+            $mail->Body = "Bonjour,<br><br>Ton code de vérification est le suivant :<br>
+                           <b>$code</b><br><br>Ce code expire dans 10 minutes.<br>
+                           Si tu n'as pas demandé cette opération, ignore ce message.";
+
+            $mail->send();
+
+            header("Location:" . BASE_URL . "/index.php?page=second_authenticator");
             exit;
-        } catch (\PDOException $e) {
-            $_SESSION['erreur'] = "Erreur d'inscription : " . $e->getMessage();
-            header("Location: " . BASE_URL . "/index.php?page=sInscrire");
-            exit;
+        } catch (Exception $e) {
+            $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";
+            echo "<p style='color:red;'>$error</p>";
         }
     }
 }

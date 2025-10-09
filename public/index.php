@@ -39,6 +39,12 @@ use controllers\AccueilController;
 use controllers\BienvenueController;
 use controllers\SeConnecterController;
 use controllers\DoubleAuthentificationController;
+use controllers\SInscrireController;
+use controllers\SeDeconnecterController;
+use controllers\PlanDuSiteController;
+use controllers\FooterController;
+use controllers\Builder;
+use controllers\MDPOublieController;
 
 switch ($page) {
 
@@ -57,12 +63,31 @@ switch ($page) {
         $controller->render();
         break;
 
-    case 'secondAuthenticator':
+    case 'second_authenticator':
         $controller = new DoubleAuthentificationController($connection);
         $controller->render();
         break;
     
+    case 's_inscrire':
+        $controller = new SInscrireController($connection);
+        $controller->render();
+        break;
+    
+    case 'logout':
+        $controller = new SeDeconnecterController();
+        $controller->render();
+        break;
 
+    case 'plan_du_site':
+        $controller = new PlanDuSiteController(PAGES_PATH, BASE_URL);
+        $controller->render();
+        break;
+
+    case 'forgot':
+        $controller = new MdpOublieController($connection);
+        $controller->render();
+        break;
+    
     default:
         echo "<h2>Page non trouvée</h2>";
         break;
@@ -77,11 +102,10 @@ $routes = [ 'home' => CONTROLLERS_PATH . '/AccueilController.php',
     'logout' => CONTROLLERS_PATH . '/SeDeconnecterController.php',
     'signup' => CONTROLLERS_PATH . '/SInscrireController.php',
     'login' => CONTROLLERS_PATH . '/SeConnecterController.php',
-    'forgot' => PAGES_PATH . '/MdpOublie.php',
-    'send_reset' => CONTROLLERS_PATH . '/MdpOublieController.php',
+    'forgot' => CONTROLLERS_PATH . '/MdpOublieController.php',
     'password_reset' => PAGES_PATH . '/MdpRenit.php',
-    'perform_reset' => CONTROLLERS_PATH . '/mdpRenitController.php',
-    'secondAuthenticator' => CONTROLLERS_PATH . '/DoubleAuthentificationController.php',];
+    'perform_reset' => CONTROLLERS_PATH . '/MdpRenitController.php',
+    'second_authenticator' => CONTROLLERS_PATH . '/DoubleAuthentificationController.php',];
 
 
 

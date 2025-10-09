@@ -6,18 +6,31 @@ class PlanDuSiteController
 {
     private string $viewsPath;
     private string $baseUrl;
-
+    public $head;
+    public $pageTitle;
+    public $pageDescription;
+    public $pageKeywords;
+    public $pageCss;
+    public $pageAuthor;
     public array $pages = [];
 
     public function __construct(string $viewsPath, string $baseUrl)
     {
         $this->viewsPath = $viewsPath;
         $this->baseUrl = $baseUrl;
+        
+        // ───────────── Head ─────────────
+        $pageTitle = "Plan du site";
+        $pageDescription = "Site officiel des auteurs ACH Sofia, ARFI Maxime, BURBECK Heather et MARCHITTO Ilian. Découvrez les différentes pages de notre site.";
+        $pageKeywords = "Fan2Jul, ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian, communauté, plan du site";
+        $pageAuthor = "ACH Sofia, ARFI Maxime, BURBECK Heather, MARCHITTO Ilian";
+        $pageCss = ["planDuSite.css", $styleDynamique];
+        $this->head = new HeadController($pageTitle, $pageDescription, $pageKeywords, $pageAuthor, $pageCss);
     }
 
     public function buildPages(): void
     {
-        $dirDisk = $this->viewsPath . '/pages';
+        $dirDisk = $this->viewsPath;
         $this->pages = [];
 
         if (!is_dir($dirDisk)) return;
@@ -28,7 +41,7 @@ class PlanDuSiteController
             $slug = pathinfo($file, PATHINFO_FILENAME);
 
             // Ignorer certaines pages
-            if (in_array($slug, ['bienvenue', 'forgot', 'password_reset', 'seDeconnecter', 'mdpRenit', 'mdpOublie'], true)) {
+            if (in_array($slug, ['bienvenue', 'forgot', 'password_reset', 'logout', 'mdpRenit', 'mdpOublie'], true)) {
                 continue;
             }
 
@@ -47,7 +60,10 @@ class PlanDuSiteController
 
     public function render(): void
     {
-        $this->buildPages();
-        require $this->viewsPath . '/pages/planDuSite.php';
+        $vars = get_object_vars($this);
+        extract($vars);
+
+        require_once LAYOUT_PATH . '/head.php';
+        include PAGES_PATH . '/planDuSite.php';
     }
 }

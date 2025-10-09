@@ -8,7 +8,7 @@ body {
 /* ====== TOGGLE THEME BUTTON ====== */
 .toggle-theme-btn {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   top: 100px;
   left: 30px;
   width: 70px;              /* largeur du switch */

@@ -15,7 +15,7 @@
             <div class="error"><?= $error ?></div>
         <?php endif; ?>
 
-        <form action='<?= BASE_URL ?>/index.php?page=send_reset' method="post">
+        <form action='<?= BASE_URL ?>/index.php?page=forgot' method="post">
             <label>Adresse e-mail</label>
             <input type="email" name="email" placeholder="Entrez votre e-mail" required>
 
@@ -23,7 +23,7 @@
         </form>
 
         <p class="forgot">
-            <a href="<?= BASE_URL ?>/index.php?page=seConnecter">Retour à la connexion</a>
+            <a href="<?= BASE_URL ?>/index.php?page=se_connecter">Retour à la connexion</a>
             <a href="<?= BASE_URL ?>/index.php?page=home">Retour à l'accueil</a>
         </p>
     </div>

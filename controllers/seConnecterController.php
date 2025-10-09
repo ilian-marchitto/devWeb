@@ -99,7 +99,7 @@ class SeConnecterController
                            Si tu n'as pas demandé cette opération, ignore ce message.";;
                     $mail->send();
 
-                    header("Location:" . BASE_URL . "/index.php?page=secondAuthenticator");
+                    header("Location:" . BASE_URL . "/index.php?page=second_authenticator");
                     exit;
                 } catch (Exception $e) {
                     $error = "Erreur lors de l'envoi de l'e-mail : {$mail->ErrorInfo}";

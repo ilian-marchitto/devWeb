@@ -7,7 +7,6 @@ class BienvenueController
     private PDO $connection;
     private string $prenom;
     private string $initiale;
-    private string $styleDynamique;
     private HeadController $head;
 
     public function __construct(PDO $connection)
@@ -16,11 +15,11 @@ class BienvenueController
 
         // ─────────────── Gestion du thème ───────────────
         toggleButtonController::handleThemeToggle();
-        $this->styleDynamique = toggleButtonController::getActiveStyle();
+        $styleDynamique = toggleButtonController::getActiveStyle();
 
         // ─────────────── Protection de la page ───────────────
         if (!isset($_SESSION['firstname'])) {
-            header("Location: " . BASE_URL . "/index.php?page=seConnecter");
+            header("Location: " . BASE_URL . "/index.php?page=se_connecter");
             exit;
         }
 
@@ -43,7 +42,7 @@ class BienvenueController
     public function render(): void
     {
         require_once LAYOUT_PATH . '/head.php';
-        require_once PAGES_PATH . '/bienvenue.php';
+        include PAGES_PATH . '/bienvenue.php';
     }
 
     // ─────────────── Getters utiles pour la vue ───────────────

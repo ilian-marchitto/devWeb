@@ -4,7 +4,7 @@
 </div>
 
 <div class="login-container">
-    <form action="?page=signup" method="post" class="login-form">
+    <form action="?page=s_inscrire" method="post" class="login-form">
         <h2>Créer un compte</h2>
         <?php
         

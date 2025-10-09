@@ -47,7 +47,7 @@ class AccueilController {
         // ───────────── Header & Footer ─────────────
         $isLoggedIn = isset($_SESSION['email']);
         $this->header = new HeaderController($isLoggedIn);
-        $this->footer = new FooterController();
+        $this->footer = new FooterController($connection);
         $this->navItems = $this->header->getNavItems();
         $this->buttonItems = $this->header->getButtonItems();
         $this->fontItems = $this->header->getFontItems();
