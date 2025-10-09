@@ -4,20 +4,22 @@ class Autoloader
     public static function register()
     {
         spl_autoload_register(function ($class) {
-            // Dossiers où chercher
-            $paths = [BASE_PATH];
-
-            foreach ($paths as $path) {
-                $file = $path . DIRECTORY_SEPARATOR . $class . '.php';
-                if (file_exists($file)) {
-                    require $file;
-                    return true;
-                }
+            // Convertir les backslashes du namespace en séparateurs de répertoire
+            $classPath = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+            
+            // Construire le chemin complet du fichier
+            $file = BASE_PATH . DIRECTORY_SEPARATOR . $classPath . '.php';
+            
+            // Charger le fichier s'il existe
+            if (file_exists($file)) {
+                require_once $file;
+                return true;
             }
-
+            
             return false;
         });
     }
 }
+
+// Enregistrer l'autoloader immédiatement
 Autoloader::register();
-?>
