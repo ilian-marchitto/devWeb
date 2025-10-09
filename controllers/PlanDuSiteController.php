@@ -48,10 +48,10 @@ class PlanDuSiteController
         'bienvenue', 
         'forgot', 
         'password_reset', 
-        'logout', 
         'mdpRenit', 
         'mdpOublie', 
-        'second_authenticator'
+        'DoubleAuthentification',
+        'SeDeconnecter',
     ];
 
     // Mapping : slug fichier => [nom d'affichage, slug URL]
