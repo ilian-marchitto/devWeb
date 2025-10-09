@@ -4,7 +4,7 @@ namespace controllers;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use App\Models\UserModels;
+use models\UserModels;
 
 class MdpRenitController
 {
