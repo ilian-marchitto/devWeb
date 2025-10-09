@@ -14,7 +14,7 @@ class DoubleAuthentificationController
     public $pageCss;
     public $pageAuthor;
 
-    public function __construct($connection)
+    public function __construct(PDO $connection)
     {
 
         $this->connection = $connection;
