@@ -24,6 +24,7 @@ class MdpRenitController
     private array $cssFiles = [];
     public $success;
     public $error;
+    public $head;
     
 
     public function __construct($connection)
